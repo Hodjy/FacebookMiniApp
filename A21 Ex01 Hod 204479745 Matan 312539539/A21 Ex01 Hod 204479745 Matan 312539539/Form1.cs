@@ -39,8 +39,9 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                 }
                 else
                 {
-                    Text = string.Format("Logged in as {0}", m_CurrentConnection.LoggedInUser.Name);
+                    Text = string.Format("Mini Facebook - {0}", m_CurrentConnection.LoggedInUser.Name);
                     connectionButton.Text = "Log Out";
+                    UserLabel1.Text = m_CurrentConnection.LoggedInUser.Name;
                     fetchUserInfo();
                 }
             }
@@ -53,73 +54,178 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void fetchUserInfo()
         {
-            fetchWallPosts();
-            fetchAlbums();
-            fetchGroups();
-            fetchEvents();
+            profilePictureBox.LoadAsync(m_CurrentConnection.LoggedInUser.PictureNormalURL);
+            fetchPosts(m_CurrentConnection.LoggedInUser);
+            fetch<User>(m_CurrentConnection.LoggedInUser.Friends, FriendsListBox);
+            fetch<Event>(m_CurrentConnection.LoggedInUser.Events, EventsListBox);
+            fetch<Album>(m_CurrentConnection.LoggedInUser.Albums, AlbumsListBox);
+            fetch<Group>(m_CurrentConnection.LoggedInUser.Groups, GroupsListBox);
         }
 
-        private void fetchWallPosts()
+        private void fetchPosts(User i_UserToFetchPosts)
         {
-            foreach (Post wallPost in m_CurrentConnection.LoggedInUser.WallPosts)
+            PostsListBox.Items.Clear();
+            foreach (Post wallPost in i_UserToFetchPosts.WallPosts)
             {
                 if (wallPost.Caption != null)
                 {
-                    TimelineListBox.Items.Add(wallPost.Caption);
+                    PostsListBox.Items.Add(wallPost.Caption);
                 }
                 else
                 {
-                    TimelineListBox.Items.Add(string.Format("[{0}]", wallPost.Type));
+                    PostsListBox.Items.Add(string.Format("[{0}]", wallPost.Type));
                 }
             }
 
-            if (m_CurrentConnection.LoggedInUser.WallPosts.Count == 0)
+            if (i_UserToFetchPosts.WallPosts.Count == 0)
             {
-                MessageBox.Show(string.Format("{0} has no wall posts", m_CurrentConnection.LoggedInUser.Name));
+                PostsListBox.Items.Add(string.Format("{0} has no posts", i_UserToFetchPosts.Name));
             }
         }
 
-        private void fetchAlbums()
+        private void fetch<T>(FacebookObjectCollection<T> i_Collection, ListBox i_ListBoxToUpdate)
         {
-            AlbumsListBox.DisplayMember = "Name";
-            foreach (Album album in m_CurrentConnection.LoggedInUser.Albums)
+            i_ListBoxToUpdate.DisplayMember = "Name";
+            foreach (T evnt in i_Collection)
             {
-                AlbumsListBox.Items.Add(album);
+                i_ListBoxToUpdate.Items.Add(evnt);
             }
 
-            if (m_CurrentConnection.LoggedInUser.Albums.Count == 0)
+            if (i_Collection.Count() == 0)
             {
-                MessageBox.Show(string.Format("{0} has no albums", m_CurrentConnection.LoggedInUser.Name));
+                i_ListBoxToUpdate.Items.Add(string.Format("{0} has no {1}", m_CurrentConnection.LoggedInUser.Name, typeof(T).Name));
             }
         }
 
-        private void fetchGroups()
+        private void friendsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GroupsListBox.DisplayMember = "Name";
-            foreach (Group group in m_CurrentConnection.LoggedInUser.Groups)
+            if (FriendsListBox.SelectedItem is User)
             {
-                GroupsListBox.Items.Add(group);
+                User selectedFriend = FriendsListBox.SelectedItem as User;
+                fetchPosts(selectedFriend);
             }
-
-            if (m_CurrentConnection.LoggedInUser.Groups.Count == 0)
+            else
             {
-                MessageBox.Show(string.Format("{0} has no groups", m_CurrentConnection.LoggedInUser.Name));
+                PostsListBox.Items.Clear();
             }
         }
 
-        private void fetchEvents()
+        private void AlbumsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EventsListBox.DisplayMember = "Name";
-            foreach (Event evnt in m_CurrentConnection.LoggedInUser.Events)
+            if (AlbumsListBox.SelectedItem is Album)
             {
-                EventsListBox.Items.Add(evnt);
+                Album selectedAlbum = AlbumsListBox.SelectedItem as Album;
+                // TODO : fetch pictures list from selected album
             }
-
-            if (m_CurrentConnection.LoggedInUser.Events.Count == 0)
+            else
             {
-                MessageBox.Show(string.Format("{0} has no events", m_CurrentConnection.LoggedInUser.Name));
+                PostsListBox.Items.Clear();
             }
         }
 
+        private void GroupsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (GroupsListBox.SelectedItem is Group)
+            {
+                Group selectedGroup = GroupsListBox.SelectedItem as Group;
+                // TODO : fetch pictures list from selected album
+            }
+            else
+            {
+                PostsListBox.Items.Clear();
+            }
+        }
+
+        private void EventsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (EventsListBox.SelectedItem is Event)
+            {
+                Event selectedEvent = EventsListBox.SelectedItem as Event;
+                // TODO : fetch pictures list from selected album
+            }
+            else
+            {
+                PostsListBox.Items.Clear();
+            }
+        }
+
+        private void MyPostsButton_Click(object sender, EventArgs e)
+        {
+            PostsListBox.Items.Clear();
+            fetchPosts(m_CurrentConnection.LoggedInUser);
+        }
+
+        private void PostsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (PostsListBox.SelectedItem is Post)
+            {
+                Post selectedPost = PostsListBox.SelectedItem as Post;
+                fetchPostsDetails(selectedPost);
+            }
+        }
+
+        private void fetchPostsDetails(Post selectedPost)
+        {
+            // show post picture, if there isnt one, show the poster profile picture
+            if (selectedPost.PictureURL == null)
+            {
+                PostPictureBox.LoadAsync(selectedPost.From.PictureLargeURL);
+            }
+            else
+            {
+                PostPictureBox.LoadAsync(selectedPost.PictureURL);
+            }
+
+            PostTextBox.Text = selectedPost.Message;
+            fetch<Comment>(selectedPost.Comments, PostCommentsListBox);
+            updatePostInformation(selectedPost);
+        }
+
+        private void updatePostInformation(Post selectedPost)
+        {
+            LikesLabel.Text = string.Format("Likes: {0}", selectedPost.LikedBy.Count);
+            CommentsLabel.Text = string.Format("Comments: {0}", selectedPost.Comments.Count);
+
+            if (isLikeByUser(selectedPost, m_CurrentConnection.LoggedInUser))
+            {
+                LikeButton.Text = "Dislike";
+            }
+            else
+            {
+                LikeButton.Text = "Like";
+            }
+        }
+
+        private void LikeButton_Click(object sender, EventArgs e)
+        {
+            Post selectedPost = PostsListBox.SelectedItem as Post;
+
+            if (selectedPost != null)
+            {
+                if (isLikeByUser(selectedPost, m_CurrentConnection.LoggedInUser))
+                {
+                    selectedPost.Unlike();
+                    updatePostInformation(selectedPost);
+                }
+                else
+                {
+                    selectedPost.Like();
+                    updatePostInformation(selectedPost);
+                }
+            }
+        }
+
+        private bool isLikeByUser(Post i_PostToCheck, User i_UserToCheck)
+        {
+            bool isLiked = false;
+
+            if (i_PostToCheck.LikedBy.Contains(i_UserToCheck))
+            {
+                isLiked = true;
+            }
+
+            return isLiked;
+        }
     }
+
 }

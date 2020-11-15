@@ -43,15 +43,14 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                 m_LoginResult = FacebookService.Login(i_AppID,
                     "public_profile",
                     "email",
-                    "publish_to_groups",
                     "user_birthday",
                     "user_age_range",
                     "user_gender",
                     "user_link",
                     "user_tagged_places",
                     "user_videos",
-                    "publish_to_groups",
-                    "groups_access_member_info",
+                    //"publish_to_groups",
+                    //"groups_access_member_info",
                     "user_friends",
                     "user_events",
                     "user_likes",
@@ -60,9 +59,10 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                     "user_posts",
                     "user_hometown",
                     "user_managed_groups",
-                    "read_page_mailboxes",
+                    //"read_page_mailboxes",
                     "user_status"
                     );
+                
             }
         }
 

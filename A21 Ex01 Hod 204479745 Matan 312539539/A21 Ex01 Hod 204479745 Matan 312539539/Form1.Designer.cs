@@ -30,11 +30,11 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.connectionButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.UserLabel1 = new System.Windows.Forms.Label();
             this.profilePictureBox = new System.Windows.Forms.PictureBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.TimelineListBox = new System.Windows.Forms.ListBox();
+            this.FriendsListBox = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.AlbumsListBox = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -42,16 +42,17 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.EventsListBox = new System.Windows.Forms.ListBox();
             this.PostsGroupBox = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.CommentsLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.LikesLabel = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.LikeButton = new System.Windows.Forms.Button();
+            this.PostTextBox = new System.Windows.Forms.TextBox();
+            this.PostCommentsListBox = new System.Windows.Forms.ListBox();
+            this.PostPictureBox = new System.Windows.Forms.PictureBox();
+            this.PostsListBox = new System.Windows.Forms.ListBox();
+            this.MyPostsButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -60,13 +61,13 @@
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.PostsGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PostPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.connectionButton);
-            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.UserLabel1);
             this.groupBox1.Controls.Add(this.profilePictureBox);
             this.groupBox1.Location = new System.Drawing.Point(16, 15);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
@@ -88,15 +89,15 @@
             this.connectionButton.UseVisualStyleBackColor = true;
             this.connectionButton.Click += new System.EventHandler(this.connectionButton_Click);
             // 
-            // label1
+            // UserLabel1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 117);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(126, 17);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Selected Memeber";
+            this.UserLabel1.AutoSize = true;
+            this.UserLabel1.Location = new System.Drawing.Point(9, 117);
+            this.UserLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.UserLabel1.Name = "UserLabel1";
+            this.UserLabel1.Size = new System.Drawing.Size(126, 17);
+            this.UserLabel1.TabIndex = 1;
+            this.UserLabel1.Text = "Selected Memeber";
             // 
             // profilePictureBox
             // 
@@ -122,25 +123,26 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.TimelineListBox);
+            this.tabPage1.Controls.Add(this.FriendsListBox);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage1.Size = new System.Drawing.Size(275, 296);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Timeline";
+            this.tabPage1.Text = "Friends";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // TimelineListBox
+            // FriendsListBox
             // 
-            this.TimelineListBox.FormattingEnabled = true;
-            this.TimelineListBox.ItemHeight = 16;
-            this.TimelineListBox.Location = new System.Drawing.Point(-5, 2);
-            this.TimelineListBox.Margin = new System.Windows.Forms.Padding(4);
-            this.TimelineListBox.Name = "TimelineListBox";
-            this.TimelineListBox.Size = new System.Drawing.Size(276, 292);
-            this.TimelineListBox.TabIndex = 0;
+            this.FriendsListBox.FormattingEnabled = true;
+            this.FriendsListBox.ItemHeight = 16;
+            this.FriendsListBox.Location = new System.Drawing.Point(-5, 2);
+            this.FriendsListBox.Margin = new System.Windows.Forms.Padding(4);
+            this.FriendsListBox.Name = "FriendsListBox";
+            this.FriendsListBox.Size = new System.Drawing.Size(276, 292);
+            this.FriendsListBox.TabIndex = 0;
+            this.FriendsListBox.SelectedIndexChanged += new System.EventHandler(this.friendsListBox_SelectedIndexChanged);
             // 
             // tabPage2
             // 
@@ -158,11 +160,12 @@
             // 
             this.AlbumsListBox.FormattingEnabled = true;
             this.AlbumsListBox.ItemHeight = 16;
-            this.AlbumsListBox.Location = new System.Drawing.Point(-5, 0);
+            this.AlbumsListBox.Location = new System.Drawing.Point(0, 0);
             this.AlbumsListBox.Margin = new System.Windows.Forms.Padding(4);
             this.AlbumsListBox.Name = "AlbumsListBox";
             this.AlbumsListBox.Size = new System.Drawing.Size(276, 292);
             this.AlbumsListBox.TabIndex = 1;
+            this.AlbumsListBox.SelectedIndexChanged += new System.EventHandler(this.AlbumsListBox_SelectedIndexChanged);
             // 
             // tabPage3
             // 
@@ -184,6 +187,7 @@
             this.GroupsListBox.Name = "GroupsListBox";
             this.GroupsListBox.Size = new System.Drawing.Size(276, 292);
             this.GroupsListBox.TabIndex = 2;
+            this.GroupsListBox.SelectedIndexChanged += new System.EventHandler(this.GroupsListBox_SelectedIndexChanged);
             // 
             // tabPage4
             // 
@@ -205,20 +209,21 @@
             this.EventsListBox.Name = "EventsListBox";
             this.EventsListBox.Size = new System.Drawing.Size(276, 292);
             this.EventsListBox.TabIndex = 2;
+            this.EventsListBox.SelectedIndexChanged += new System.EventHandler(this.EventsListBox_SelectedIndexChanged);
             // 
             // PostsGroupBox
             // 
             this.PostsGroupBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.PostsGroupBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PostsGroupBox.Controls.Add(this.label4);
+            this.PostsGroupBox.Controls.Add(this.CommentsLabel);
             this.PostsGroupBox.Controls.Add(this.label3);
-            this.PostsGroupBox.Controls.Add(this.label2);
+            this.PostsGroupBox.Controls.Add(this.LikesLabel);
             this.PostsGroupBox.Controls.Add(this.button3);
             this.PostsGroupBox.Controls.Add(this.button2);
-            this.PostsGroupBox.Controls.Add(this.button1);
-            this.PostsGroupBox.Controls.Add(this.textBox1);
-            this.PostsGroupBox.Controls.Add(this.listBox2);
-            this.PostsGroupBox.Controls.Add(this.pictureBox2);
+            this.PostsGroupBox.Controls.Add(this.LikeButton);
+            this.PostsGroupBox.Controls.Add(this.PostTextBox);
+            this.PostsGroupBox.Controls.Add(this.PostCommentsListBox);
+            this.PostsGroupBox.Controls.Add(this.PostPictureBox);
             this.PostsGroupBox.Location = new System.Drawing.Point(629, 16);
             this.PostsGroupBox.Margin = new System.Windows.Forms.Padding(4);
             this.PostsGroupBox.Name = "PostsGroupBox";
@@ -228,15 +233,15 @@
             this.PostsGroupBox.TabStop = false;
             this.PostsGroupBox.Text = "PostGroup";
             // 
-            // label4
+            // CommentsLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(400, 122);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 17);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Comments:";
+            this.CommentsLabel.AutoSize = true;
+            this.CommentsLabel.Location = new System.Drawing.Point(400, 122);
+            this.CommentsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.CommentsLabel.Name = "CommentsLabel";
+            this.CommentsLabel.Size = new System.Drawing.Size(78, 17);
+            this.CommentsLabel.TabIndex = 11;
+            this.CommentsLabel.Text = "Comments:";
             // 
             // label3
             // 
@@ -248,15 +253,15 @@
             this.label3.TabIndex = 10;
             this.label3.Text = "Shares:";
             // 
-            // label2
+            // LikesLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(432, 23);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 17);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Likes:";
+            this.LikesLabel.AutoSize = true;
+            this.LikesLabel.Location = new System.Drawing.Point(432, 23);
+            this.LikesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LikesLabel.Name = "LikesLabel";
+            this.LikesLabel.Size = new System.Drawing.Size(45, 17);
+            this.LikesLabel.TabIndex = 9;
+            this.LikesLabel.Text = "Likes:";
             // 
             // button3
             // 
@@ -278,53 +283,66 @@
             this.button2.Text = "Share";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // LikeButton
             // 
-            this.button1.Location = new System.Drawing.Point(8, 23);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 42);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Like";
-            this.button1.UseVisualStyleBackColor = true;
+            this.LikeButton.Location = new System.Drawing.Point(8, 23);
+            this.LikeButton.Margin = new System.Windows.Forms.Padding(4);
+            this.LikeButton.Name = "LikeButton";
+            this.LikeButton.Size = new System.Drawing.Size(100, 42);
+            this.LikeButton.TabIndex = 6;
+            this.LikeButton.Text = "Like";
+            this.LikeButton.UseVisualStyleBackColor = true;
+            this.LikeButton.Click += new System.EventHandler(this.LikeButton_Click);
             // 
-            // textBox1
+            // PostTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(9, 265);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(468, 143);
-            this.textBox1.TabIndex = 5;
+            this.PostTextBox.Location = new System.Drawing.Point(9, 265);
+            this.PostTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.PostTextBox.Multiline = true;
+            this.PostTextBox.Name = "PostTextBox";
+            this.PostTextBox.Size = new System.Drawing.Size(468, 143);
+            this.PostTextBox.TabIndex = 5;
             // 
-            // listBox2
+            // PostCommentsListBox
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 16;
-            this.listBox2.Location = new System.Drawing.Point(8, 453);
-            this.listBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(469, 116);
-            this.listBox2.TabIndex = 4;
+            this.PostCommentsListBox.FormattingEnabled = true;
+            this.PostCommentsListBox.ItemHeight = 16;
+            this.PostCommentsListBox.Location = new System.Drawing.Point(8, 453);
+            this.PostCommentsListBox.Margin = new System.Windows.Forms.Padding(4);
+            this.PostCommentsListBox.Name = "PostCommentsListBox";
+            this.PostCommentsListBox.Size = new System.Drawing.Size(469, 116);
+            this.PostCommentsListBox.TabIndex = 4;
             // 
-            // pictureBox2
+            // PostPictureBox
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(119, 23);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(257, 203);
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
+            this.PostPictureBox.Location = new System.Drawing.Point(119, 23);
+            this.PostPictureBox.Margin = new System.Windows.Forms.Padding(4);
+            this.PostPictureBox.Name = "PostPictureBox";
+            this.PostPictureBox.Size = new System.Drawing.Size(257, 203);
+            this.PostPictureBox.TabIndex = 0;
+            this.PostPictureBox.TabStop = false;
             // 
-            // listBox1
+            // PostsListBox
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(320, 300);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(223, 292);
-            this.listBox1.TabIndex = 3;
+            this.PostsListBox.FormattingEnabled = true;
+            this.PostsListBox.ItemHeight = 16;
+            this.PostsListBox.Location = new System.Drawing.Point(320, 298);
+            this.PostsListBox.Margin = new System.Windows.Forms.Padding(4);
+            this.PostsListBox.Name = "PostsListBox";
+            this.PostsListBox.Size = new System.Drawing.Size(223, 292);
+            this.PostsListBox.TabIndex = 3;
+            this.PostsListBox.SelectedIndexChanged += new System.EventHandler(this.PostsListBox_SelectedIndexChanged);
+            // 
+            // MyPostsButton
+            // 
+            this.MyPostsButton.Location = new System.Drawing.Point(320, 256);
+            this.MyPostsButton.Name = "MyPostsButton";
+            this.MyPostsButton.Size = new System.Drawing.Size(99, 33);
+            this.MyPostsButton.TabIndex = 4;
+            this.MyPostsButton.Text = "My Posts";
+            this.MyPostsButton.UseMnemonic = false;
+            this.MyPostsButton.UseVisualStyleBackColor = true;
+            this.MyPostsButton.Click += new System.EventHandler(this.MyPostsButton_Click);
             // 
             // Form1
             // 
@@ -332,7 +350,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1129, 612);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.MyPostsButton);
+            this.Controls.Add(this.PostsListBox);
             this.Controls.Add(this.PostsGroupBox);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.groupBox1);
@@ -350,7 +369,7 @@
             this.tabPage4.ResumeLayout(false);
             this.PostsGroupBox.ResumeLayout(false);
             this.PostsGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PostPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -358,11 +377,11 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label UserLabel1;
         private System.Windows.Forms.PictureBox profilePictureBox;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.ListBox TimelineListBox;
+        private System.Windows.Forms.ListBox FriendsListBox;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
@@ -370,17 +389,18 @@
         private System.Windows.Forms.ListBox GroupsListBox;
         private System.Windows.Forms.ListBox EventsListBox;
         private System.Windows.Forms.GroupBox PostsGroupBox;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ListBox PostsListBox;
+        private System.Windows.Forms.ListBox PostCommentsListBox;
+        private System.Windows.Forms.PictureBox PostPictureBox;
+        private System.Windows.Forms.Label CommentsLabel;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label LikesLabel;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button LikeButton;
+        private System.Windows.Forms.TextBox PostTextBox;
         private System.Windows.Forms.Button connectionButton;
+        private System.Windows.Forms.Button MyPostsButton;
     }
 }
 
