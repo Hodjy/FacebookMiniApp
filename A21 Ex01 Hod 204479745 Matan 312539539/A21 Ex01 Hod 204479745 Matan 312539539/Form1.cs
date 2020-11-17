@@ -85,7 +85,6 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void fetch<T>(FacebookObjectCollection<T> i_Collection, ListBox i_ListBoxToUpdate)
         {
-            i_ListBoxToUpdate.DisplayMember = "Name";
             foreach (T evnt in i_Collection)
             {
                 i_ListBoxToUpdate.Items.Add(evnt);
@@ -186,7 +185,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             LikesLabel.Text = string.Format("Likes: {0}", selectedPost.LikedBy.Count);
             CommentsLabel.Text = string.Format("Comments: {0}", selectedPost.Comments.Count);
 
-            if (isLikeByUser(selectedPost, m_CurrentConnection.LoggedInUser))
+            if (isLikedByUser(selectedPost, m_CurrentConnection.LoggedInUser))
             {
                 LikeButton.Text = "Dislike";
             }
@@ -202,7 +201,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
             if (selectedPost != null)
             {
-                if (isLikeByUser(selectedPost, m_CurrentConnection.LoggedInUser))
+                if (isLikedByUser(selectedPost, m_CurrentConnection.LoggedInUser))
                 {
                     selectedPost.Unlike();
                     updatePostInformation(selectedPost);
@@ -215,7 +214,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
         }
 
-        private bool isLikeByUser(Post i_PostToCheck, User i_UserToCheck)
+        private bool isLikedByUser(Post i_PostToCheck, User i_UserToCheck)
         {
             bool isLiked = false;
 
@@ -225,6 +224,12 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
 
             return isLiked;
+        }
+
+        private void CommentButton_Click(object sender, EventArgs e)
+        {
+            // TODO: Comment button click event
+            throw new NotImplementedException();
         }
     }
 

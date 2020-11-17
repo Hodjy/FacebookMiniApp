@@ -45,8 +45,8 @@
             this.CommentsLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.LikesLabel = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.CommentButton = new System.Windows.Forms.Button();
+            this.ShareButton = new System.Windows.Forms.Button();
             this.LikeButton = new System.Windows.Forms.Button();
             this.PostTextBox = new System.Windows.Forms.TextBox();
             this.PostCommentsListBox = new System.Windows.Forms.ListBox();
@@ -135,6 +135,7 @@
             // 
             // FriendsListBox
             // 
+            this.FriendsListBox.DisplayMember = "Name";
             this.FriendsListBox.FormattingEnabled = true;
             this.FriendsListBox.ItemHeight = 16;
             this.FriendsListBox.Location = new System.Drawing.Point(-5, 2);
@@ -158,6 +159,7 @@
             // 
             // AlbumsListBox
             // 
+            this.AlbumsListBox.DisplayMember = "Name";
             this.AlbumsListBox.FormattingEnabled = true;
             this.AlbumsListBox.ItemHeight = 16;
             this.AlbumsListBox.Location = new System.Drawing.Point(0, 0);
@@ -180,6 +182,7 @@
             // 
             // GroupsListBox
             // 
+            this.GroupsListBox.DisplayMember = "Name";
             this.GroupsListBox.FormattingEnabled = true;
             this.GroupsListBox.ItemHeight = 16;
             this.GroupsListBox.Location = new System.Drawing.Point(-5, 0);
@@ -202,6 +205,7 @@
             // 
             // EventsListBox
             // 
+            this.EventsListBox.DisplayMember = "Name";
             this.EventsListBox.FormattingEnabled = true;
             this.EventsListBox.ItemHeight = 16;
             this.EventsListBox.Location = new System.Drawing.Point(-5, 0);
@@ -218,8 +222,8 @@
             this.PostsGroupBox.Controls.Add(this.CommentsLabel);
             this.PostsGroupBox.Controls.Add(this.label3);
             this.PostsGroupBox.Controls.Add(this.LikesLabel);
-            this.PostsGroupBox.Controls.Add(this.button3);
-            this.PostsGroupBox.Controls.Add(this.button2);
+            this.PostsGroupBox.Controls.Add(this.CommentButton);
+            this.PostsGroupBox.Controls.Add(this.ShareButton);
             this.PostsGroupBox.Controls.Add(this.LikeButton);
             this.PostsGroupBox.Controls.Add(this.PostTextBox);
             this.PostsGroupBox.Controls.Add(this.PostCommentsListBox);
@@ -263,25 +267,26 @@
             this.LikesLabel.TabIndex = 9;
             this.LikesLabel.Text = "Likes:";
             // 
-            // button3
+            // CommentButton
             // 
-            this.button3.Location = new System.Drawing.Point(8, 122);
-            this.button3.Margin = new System.Windows.Forms.Padding(4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 42);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "Comment";
-            this.button3.UseVisualStyleBackColor = true;
+            this.CommentButton.Location = new System.Drawing.Point(8, 122);
+            this.CommentButton.Margin = new System.Windows.Forms.Padding(4);
+            this.CommentButton.Name = "CommentButton";
+            this.CommentButton.Size = new System.Drawing.Size(100, 42);
+            this.CommentButton.TabIndex = 8;
+            this.CommentButton.Text = "Comment";
+            this.CommentButton.UseVisualStyleBackColor = true;
+            this.CommentButton.Click += new System.EventHandler(this.CommentButton_Click);
             // 
-            // button2
+            // ShareButton
             // 
-            this.button2.Location = new System.Drawing.Point(8, 73);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 42);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Share";
-            this.button2.UseVisualStyleBackColor = true;
+            this.ShareButton.Location = new System.Drawing.Point(8, 73);
+            this.ShareButton.Margin = new System.Windows.Forms.Padding(4);
+            this.ShareButton.Name = "ShareButton";
+            this.ShareButton.Size = new System.Drawing.Size(100, 42);
+            this.ShareButton.TabIndex = 7;
+            this.ShareButton.Text = "Share";
+            this.ShareButton.UseVisualStyleBackColor = true;
             // 
             // LikeButton
             // 
@@ -296,7 +301,7 @@
             // 
             // PostTextBox
             // 
-            this.PostTextBox.Location = new System.Drawing.Point(9, 265);
+            this.PostTextBox.Location = new System.Drawing.Point(9, 243);
             this.PostTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.PostTextBox.Multiline = true;
             this.PostTextBox.Name = "PostTextBox";
@@ -305,6 +310,7 @@
             // 
             // PostCommentsListBox
             // 
+            this.PostCommentsListBox.DisplayMember = "Message";
             this.PostCommentsListBox.FormattingEnabled = true;
             this.PostCommentsListBox.ItemHeight = 16;
             this.PostCommentsListBox.Location = new System.Drawing.Point(8, 453);
@@ -395,8 +401,8 @@
         private System.Windows.Forms.Label CommentsLabel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label LikesLabel;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button CommentButton;
+        private System.Windows.Forms.Button ShareButton;
         private System.Windows.Forms.Button LikeButton;
         private System.Windows.Forms.TextBox PostTextBox;
         private System.Windows.Forms.Button connectionButton;
