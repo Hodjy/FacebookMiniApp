@@ -55,7 +55,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         private void fetchUserInfo()
         {
             profilePictureBox.LoadAsync(m_CurrentConnection.LoggedInUser.PictureNormalURL);
-            fetchPosts(m_CurrentConnection.LoggedInUser);
+            fetchPosts(m_CurrentConnection.LoggedInUser); // needs to be converted to nomral Fetch<T>
             fetch<User>(m_CurrentConnection.LoggedInUser.Friends, FriendsListBox);
             fetch<Event>(m_CurrentConnection.LoggedInUser.Events, EventsListBox);
             fetch<Album>(m_CurrentConnection.LoggedInUser.Albums, AlbumsListBox);
@@ -85,7 +85,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void fetch<T>(FacebookObjectCollection<T> i_Collection, ListBox i_ListBoxToUpdate)
         {
-            foreach (T evnt in i_Collection)
+            foreach (T evnt in i_Collection) // TODO - how to deal with posts with pictures and posts without.
             {
                 i_ListBoxToUpdate.Items.Add(evnt);
             }
@@ -98,53 +98,45 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void friendsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            PostsListBox.Items.Clear();
+
             if (FriendsListBox.SelectedItem is User)
             {
                 User selectedFriend = FriendsListBox.SelectedItem as User;
-                fetchPosts(selectedFriend);
-            }
-            else
-            {
-                PostsListBox.Items.Clear();
+                fetch<Post>(selectedFriend.WallPosts, PostsListBox);
             }
         }
 
         private void AlbumsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            PostsListBox.Items.Clear();
+
             if (AlbumsListBox.SelectedItem is Album)
             {
                 Album selectedAlbum = AlbumsListBox.SelectedItem as Album;
-                // TODO : fetch pictures list from selected album
-            }
-            else
-            {
-                PostsListBox.Items.Clear();
+                fetch<Photo>(selectedAlbum.Photos, PostsListBox);
             }
         }
 
         private void GroupsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            PostsListBox.Items.Clear();
+
             if (GroupsListBox.SelectedItem is Group)
             {
                 Group selectedGroup = GroupsListBox.SelectedItem as Group;
-                // TODO : fetch pictures list from selected album
-            }
-            else
-            {
-                PostsListBox.Items.Clear();
+                fetch<Post>(selectedGroup.WallPosts, PostsListBox);
             }
         }
 
         private void EventsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            PostsListBox.Items.Clear();
+
             if (EventsListBox.SelectedItem is Event)
             {
                 Event selectedEvent = EventsListBox.SelectedItem as Event;
-                // TODO : fetch pictures list from selected album
-            }
-            else
-            {
-                PostsListBox.Items.Clear();
+                fetch<Post>(selectedEvent.WallPosts, PostsListBox);
             }
         }
 
@@ -156,36 +148,52 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void PostsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Post selectedPost;
+            Status selectedStatus;
+
             if (PostsListBox.SelectedItem is Post)
             {
-                Post selectedPost = PostsListBox.SelectedItem as Post;
-                fetchPostsDetails(selectedPost);
+                selectedPost = PostsListBox.SelectedItem as Post;
+                fetchPostedItemDetails(selectedPost, selectedPost.PictureURL);
+            }
+            else if (PostsListBox.SelectedItem is Status)
+            {
+                selectedStatus = PostsListBox.SelectedItem as Status;
+                fetchPostedItemDetails(selectedStatus);
             }
         }
 
-        private void fetchPostsDetails(Post selectedPost)
+        private void fetchPostedItemDetails(PostedItem i_SelectedItem, string i_PictureURL = null)
         {
             // show post picture, if there isnt one, show the poster profile picture
-            if (selectedPost.PictureURL == null)
+            if (i_PictureURL == null)
             {
-                PostPictureBox.LoadAsync(selectedPost.From.PictureLargeURL);
+                try
+                {
+                    PostPictureBox.LoadAsync(i_SelectedItem.From.PictureLargeURL);
+                }
+                catch (Exception e) // in case of an unavailable profilepicture, will show default picture.
+                {
+                    PostPictureBox.LoadAsync();
+                }
+                
             }
             else
             {
-                PostPictureBox.LoadAsync(selectedPost.PictureURL);
+                PostPictureBox.LoadAsync(i_PictureURL);
             }
 
-            PostTextBox.Text = selectedPost.Message;
-            fetch<Comment>(selectedPost.Comments, PostCommentsListBox);
-            updatePostInformation(selectedPost);
+            PostTextBox.Text = i_SelectedItem.Message;
+            fetch<Comment>(i_SelectedItem.Comments, PostCommentsListBox);
+            updatePostedItemInformation(i_SelectedItem);
         }
 
-        private void updatePostInformation(Post selectedPost)
+        private void updatePostedItemInformation(PostedItem i_SelectedItem)
         {
-            LikesLabel.Text = string.Format("Likes: {0}", selectedPost.LikedBy.Count);
-            CommentsLabel.Text = string.Format("Comments: {0}", selectedPost.Comments.Count);
+            LikesLabel.Text = string.Format("Likes: {0}", i_SelectedItem.LikedBy.Count);
+            CommentsLabel.Text = string.Format("Comments: {0}", i_SelectedItem.Comments.Count);
 
-            if (isLikedByUser(selectedPost, m_CurrentConnection.LoggedInUser))
+            if (isLikedByUser(i_SelectedItem, m_CurrentConnection.LoggedInUser))
             {
                 LikeButton.Text = "Dislike";
             }
@@ -204,17 +212,17 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                 if (isLikedByUser(selectedPost, m_CurrentConnection.LoggedInUser))
                 {
                     selectedPost.Unlike();
-                    updatePostInformation(selectedPost);
+                    updatePostedItemInformation(selectedPost);
                 }
                 else
                 {
                     selectedPost.Like();
-                    updatePostInformation(selectedPost);
+                    updatePostedItemInformation(selectedPost);
                 }
             }
         }
 
-        private bool isLikedByUser(Post i_PostToCheck, User i_UserToCheck)
+        private bool isLikedByUser(PostedItem i_PostToCheck, User i_UserToCheck)
         {
             bool isLiked = false;
 
@@ -228,8 +236,23 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void CommentButton_Click(object sender, EventArgs e)
         {
-            // TODO: Comment button click event
-            throw new NotImplementedException();
+            string comment = CommentTextBox.Text;
+            string errorMsg = "An error occured while trying to comment";
+            Post selectedPost = PostsListBox.SelectedItem as Post;
+
+            try
+            {
+                if (!string.IsNullOrEmpty(comment))
+                {
+                    selectedPost.Comment(comment);
+                    updatePostedItemInformation(selectedPost);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(errorMsg);
+            }
+            
         }
     }
 
