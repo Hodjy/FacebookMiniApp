@@ -75,7 +75,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         private void fetchUserInfo()
         {
             profilePictureBox.LoadAsync(m_CurrentConnection.LoggedInUser.PictureNormalURL);
-            updatePostsListBox(m_CurrentConnection.LoggedInUser); // needs to be converted to nomral Fetch<T>
+            updateCollectionsItemsTabControllListBoxes(m_CurrentConnection.LoggedInUser); // needs to be converted to nomral Fetch<T>
             fetch<User>(m_CurrentConnection.LoggedInUser.Friends, friendsListBox);
             fetch<Event>(m_CurrentConnection.LoggedInUser.Events, eventsListBox);
             fetch<Album>(m_CurrentConnection.LoggedInUser.Albums, albumsListBox);
@@ -99,19 +99,19 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             postsListBox.Items.Clear();
         }
 
-        private void updatePostsListBox(User i_UserToFetchPosts) //TODO CHANGE METHOD
+        private void updateCollectionsItemsTabControllListBoxes(User i_UserToFetchPosts) //TODO CHANGE METHOD
         {
-            postsListBox.Items.Clear();
+            clearCollectionsItemsTabControlListBoxes();
 
-            foreach (Post wallPost in i_UserToFetchPosts.Posts)
+            foreach (Post item in i_UserToFetchPosts.Posts)
             {
-                if (wallPost.Caption != null)
+                if (item.PictureURL == null)
                 {
-                    postsListBox.Items.Add(new { wallPost.Caption, wallPost });
+                    postsListBox.Items.Add(item);
                 }
                 else
                 {
-                    postsListBox.Items.Add(new { wallPost.Name, wallPost });
+                    picturesListBox.Items.Add(item);
                 }
             }
             //postsListBox.DataSource = i_UserToFetchPosts.WallPosts;
@@ -120,6 +120,12 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             {
                 postsListBox.Items.Add(string.Format("{0} has no posts", i_UserToFetchPosts.Name));
             }
+        }
+
+        private void clearCollectionsItemsTabControlListBoxes()
+        {
+            postsListBox.Items.Clear();
+            picturesListBox.Items.Clear();
         }
 
         private void fetch<T>(FacebookObjectCollection<T> i_Collection, ListBox i_ListBoxToUpdate)
@@ -182,10 +188,15 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         private void MyPostsButton_Click(object sender, EventArgs e)
         {
             postsListBox.Items.Clear();
-            updatePostsListBox(m_CurrentConnection.LoggedInUser);
+            updateCollectionsItemsTabControllListBoxes(m_CurrentConnection.LoggedInUser);
         }
 
         private void PostsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            updateListBox(postsListBox);
+        }
+
+        private void updateListBox(ListBox i_ListBoxToUpdate)
         {
             Post selectedPost;
             Status selectedStatus;
@@ -193,19 +204,19 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
             clearAllSelectedPostInformation();
 
-            if (postsListBox.SelectedItem is Post)
+            if (i_ListBoxToUpdate.SelectedItem is Post)
             {
-                selectedPost = postsListBox.SelectedItem as Post;
+                selectedPost = i_ListBoxToUpdate.SelectedItem as Post;
                 fetchPostedItemDetails(selectedPost, selectedPost.PictureURL);
             }
-            else if (postsListBox.SelectedItem is Status)
+            else if (i_ListBoxToUpdate.SelectedItem is Status)
             {
-                selectedStatus = postsListBox.SelectedItem as Status;
+                selectedStatus = i_ListBoxToUpdate.SelectedItem as Status;
                 fetchPostedItemDetails(selectedStatus);
             }
-            else if (postsListBox.SelectedItem is Photo)
+            else if (i_ListBoxToUpdate.SelectedItem is Photo)
             {
-                selectedPhoto = postsListBox.SelectedItem as Photo;
+                selectedPhoto = i_ListBoxToUpdate.SelectedItem as Photo;
                 fetchPostedItemDetails(selectedPhoto, selectedPhoto.PictureNormalURL);
             }
         }
@@ -360,6 +371,11 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                 MessageBox.Show("There was a problem commenting on the post.");
             }
             
+        }
+
+        private void picturesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            updateListBox(picturesListBox);
         }
     }
 

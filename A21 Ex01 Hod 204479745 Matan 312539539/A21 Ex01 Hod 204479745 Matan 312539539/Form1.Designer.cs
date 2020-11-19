@@ -52,6 +52,10 @@
             this.postPictureBox = new System.Windows.Forms.PictureBox();
             this.postsListBox = new System.Windows.Forms.ListBox();
             this.myPostsButton = new System.Windows.Forms.Button();
+            this.collectionsItemsTabControl = new System.Windows.Forms.TabControl();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.picturesListBox = new System.Windows.Forms.ListBox();
             this.UserGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).BeginInit();
             this.userCollectionsTabControl.SuspendLayout();
@@ -61,6 +65,9 @@
             this.tabPage4.SuspendLayout();
             this.postsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.postPictureBox)).BeginInit();
+            this.collectionsItemsTabControl.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            this.tabPage6.SuspendLayout();
             this.SuspendLayout();
             // 
             // UserGroupBox
@@ -305,25 +312,69 @@
             // postsListBox
             // 
             this.postsListBox.BackColor = System.Drawing.Color.SlateGray;
+            this.postsListBox.DisplayMember = "Message";
             this.postsListBox.FormattingEnabled = true;
-            this.postsListBox.Location = new System.Drawing.Point(240, 242);
+            this.postsListBox.Location = new System.Drawing.Point(0, 0);
             this.postsListBox.Name = "postsListBox";
-            this.postsListBox.Size = new System.Drawing.Size(168, 238);
+            this.postsListBox.Size = new System.Drawing.Size(192, 225);
             this.postsListBox.TabIndex = 3;
             this.postsListBox.SelectedIndexChanged += new System.EventHandler(this.PostsListBox_SelectedIndexChanged);
             // 
             // myPostsButton
             // 
             this.myPostsButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.myPostsButton.Location = new System.Drawing.Point(240, 212);
+            this.myPostsButton.Location = new System.Drawing.Point(353, 207);
             this.myPostsButton.Margin = new System.Windows.Forms.Padding(2);
             this.myPostsButton.Name = "myPostsButton";
-            this.myPostsButton.Size = new System.Drawing.Size(168, 25);
+            this.myPostsButton.Size = new System.Drawing.Size(87, 25);
             this.myPostsButton.TabIndex = 4;
             this.myPostsButton.Text = "My Posts";
             this.myPostsButton.UseMnemonic = false;
             this.myPostsButton.UseVisualStyleBackColor = true;
             this.myPostsButton.Click += new System.EventHandler(this.MyPostsButton_Click);
+            // 
+            // collectionsItemsTabControl
+            // 
+            this.collectionsItemsTabControl.Controls.Add(this.tabPage5);
+            this.collectionsItemsTabControl.Controls.Add(this.tabPage6);
+            this.collectionsItemsTabControl.Location = new System.Drawing.Point(240, 240);
+            this.collectionsItemsTabControl.Name = "collectionsItemsTabControl";
+            this.collectionsItemsTabControl.SelectedIndex = 0;
+            this.collectionsItemsTabControl.Size = new System.Drawing.Size(200, 242);
+            this.collectionsItemsTabControl.TabIndex = 5;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.postsListBox);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(192, 216);
+            this.tabPage5.TabIndex = 0;
+            this.tabPage5.Text = "Posts";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.picturesListBox);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(192, 216);
+            this.tabPage6.TabIndex = 1;
+            this.tabPage6.Text = "Pictures";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // picturesListBox
+            // 
+            this.picturesListBox.BackColor = System.Drawing.Color.SlateGray;
+            this.picturesListBox.DisplayMember = "Name";
+            this.picturesListBox.FormattingEnabled = true;
+            this.picturesListBox.Location = new System.Drawing.Point(0, 0);
+            this.picturesListBox.Name = "picturesListBox";
+            this.picturesListBox.Size = new System.Drawing.Size(192, 225);
+            this.picturesListBox.TabIndex = 6;
+            this.picturesListBox.SelectedIndexChanged += new System.EventHandler(this.picturesListBox_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -331,12 +382,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(847, 497);
+            this.Controls.Add(this.collectionsItemsTabControl);
             this.Controls.Add(this.myPostsButton);
-            this.Controls.Add(this.postsListBox);
             this.Controls.Add(this.postsGroupBox);
             this.Controls.Add(this.userCollectionsTabControl);
             this.Controls.Add(this.UserGroupBox);
-            this.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Name = "Form1";
             this.Text = "Mini Facebook - User";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -351,6 +401,9 @@
             this.postsGroupBox.ResumeLayout(false);
             this.postsGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.postPictureBox)).EndInit();
+            this.collectionsItemsTabControl.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -381,6 +434,10 @@
         private System.Windows.Forms.Button connectionButton;
         private System.Windows.Forms.Button myPostsButton;
         private System.Windows.Forms.TextBox pommentTextBox;
+        private System.Windows.Forms.TabControl collectionsItemsTabControl;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.ListBox picturesListBox;
     }
 }
 
