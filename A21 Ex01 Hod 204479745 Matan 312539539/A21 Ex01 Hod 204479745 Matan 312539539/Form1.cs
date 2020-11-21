@@ -109,23 +109,29 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         private void updateCollectionsItemsTabControllListBoxes(FacebookObjectCollection<Post> i_PostsCollection)
         {
             clearCollectionsItemsTabControlListBoxes();
-
-            foreach (Post item in i_PostsCollection) // add text posts to postsListBox and picture posts to picturesListBox
+            try
             {
-                if (item.PictureURL == null)
+                foreach (Post item in i_PostsCollection) // add text posts to postsListBox and picture posts to picturesListBox
                 {
-                    postsListBox.Items.Add(item);
+                    if (item.PictureURL == null)
+                    {
+                        postsListBox.Items.Add(item);
+                    }
+                    else
+                    {
+                        picturesListBox.Items.Add(item);
+                    }
                 }
-                else
+
+                if (i_PostsCollection.Count == 0)
                 {
-                    picturesListBox.Items.Add(item);
+                    postsListBox.Items.Add("No posts to show");
+                    picturesListBox.Items.Add("No pictures to show");
                 }
             }
-
-            if (i_PostsCollection.Count == 0)
+            catch (Exception e)
             {
-                postsListBox.Items.Add("No posts to show");
-                picturesListBox.Items.Add("No pictures to show");
+                MessageBox.Show("There was a problem updating the posts and pictures list.");
             }
         }
 
@@ -160,8 +166,15 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             if (friendsListBox.SelectedItem is User)
             {
-                User selectedFriend = friendsListBox.SelectedItem as User;
-                updateCollectionsItemsTabControllListBoxes(selectedFriend.WallPosts);
+                try
+                {
+                    User selectedFriend = friendsListBox.SelectedItem as User;
+                    updateCollectionsItemsTabControllListBoxes(selectedFriend.WallPosts);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There was a problem receiving Friends.");
+                }
             }
         }
 
@@ -171,8 +184,15 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
             if (albumsListBox.SelectedItem is Album)
             {
-                Album selectedAlbum = albumsListBox.SelectedItem as Album;
-                fetch<Photo>(selectedAlbum.Photos, picturesListBox);
+                try
+                {
+                    Album selectedAlbum = albumsListBox.SelectedItem as Album;
+                    fetch<Photo>(selectedAlbum.Photos, picturesListBox);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There was a problem receiving Pictures.");
+                }
             }
         }
 
@@ -180,8 +200,15 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             if (groupsListBox.SelectedItem is Group)
             {
-                Group selectedGroup = groupsListBox.SelectedItem as Group;
-                updateCollectionsItemsTabControllListBoxes(selectedGroup.WallPosts);
+                try
+                {
+                    Group selectedGroup = groupsListBox.SelectedItem as Group;
+                    updateCollectionsItemsTabControllListBoxes(selectedGroup.WallPosts);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There was a problem receiving Groups.");
+                }
             }
         }
 
@@ -189,14 +216,28 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             if (eventsListBox.SelectedItem is Event)
             {
-                Event selectedEvent = eventsListBox.SelectedItem as Event;
-                updateCollectionsItemsTabControllListBoxes(selectedEvent.WallPosts);
+                try
+                {
+                    Event selectedEvent = eventsListBox.SelectedItem as Event;
+                    updateCollectionsItemsTabControllListBoxes(selectedEvent.WallPosts);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There was a problem receiving Events.");
+                }
             }
         }
 
         private void MyPostsButton_Click(object sender, EventArgs e)
         {
-            updateCollectionsItemsTabControllListBoxes(m_CurrentConnection.LoggedInUser.WallPosts);
+            try
+            {
+                updateCollectionsItemsTabControllListBoxes(m_CurrentConnection.LoggedInUser.WallPosts);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("There was a problem receiving Posts.");
+            }
         }
 
         private void PostsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -216,7 +257,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             Photo selectedPhoto;
 
             clearAllSelectedPostInformation();
-
+            
             if (i_ListBoxToUpdate.SelectedItem is Post)
             {
                 selectedPost = i_ListBoxToUpdate.SelectedItem as Post;
@@ -380,7 +421,14 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void dateFilterButton_Click(object sender, EventArgs e)
         {
-            updateTabControlByDate(m_CurrentConnection.LoggedInUser.Posts, postsDateTimePicker.Value);
+            try
+            {
+                updateTabControlByDate(m_CurrentConnection.LoggedInUser.Posts, postsDateTimePicker.Value);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("There was a problem Filtering.");
+            }
         }
 
         private void updateTabControlByDate(FacebookObjectCollection<Post> i_PostsToFilter, DateTime i_SelectedDate)
@@ -391,7 +439,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             {
                 foreach (Post currentPost in i_PostsToFilter)
                 {
-                    if (currentPost.CreatedTime == i_SelectedDate)
+                    if (currentPost.CreatedTime >= i_SelectedDate)
                     {
                         if (currentPost.PictureURL == null)
                         {
@@ -412,7 +460,14 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void likesFilterButton_Click(object sender, EventArgs e)
         {
-            updateTabControlByLikes(m_CurrentConnection.LoggedInUser.Posts, Decimal.ToInt32(likesNumericUpDown.Value));
+            try
+            {
+                updateTabControlByLikes(m_CurrentConnection.LoggedInUser.Posts, Decimal.ToInt32(likesNumericUpDown.Value));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("There was a problem Filtering.");
+            }
         }
 
         private void updateTabControlByLikes(FacebookObjectCollection<Post> i_PostsToFilter, int i_MinLikesCount)
