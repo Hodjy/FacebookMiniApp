@@ -135,6 +135,18 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
         }
 
+        private void addItemToCollectionItemsTabControlListBoxes(Post i_CurrentPost)
+        {
+            if (i_CurrentPost.PictureURL == null)
+            {
+                postsListBox.Items.Add(i_CurrentPost);
+            }
+            else
+            {
+                picturesListBox.Items.Add(i_CurrentPost);
+            }
+        }
+
         private void clearCollectionsItemsTabControlListBoxes()
         {
             postsListBox.Items.Clear();
@@ -441,14 +453,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                 {
                     if (currentPost.CreatedTime >= i_SelectedDate)
                     {
-                        if (currentPost.PictureURL == null)
-                        {
-                            postsListBox.Items.Add(currentPost);
-                        }
-                        else
-                        {
-                            picturesListBox.Items.Add(currentPost);
-                        }
+                        addItemToCollectionItemsTabControlListBoxes(currentPost);
                     }
                 }
             }
@@ -457,6 +462,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                 MessageBox.Show("There was problem while filtering posts");
             }
         }
+
 
         private void likesFilterButton_Click(object sender, EventArgs e)
         {
@@ -480,14 +486,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                 {
                     if (currentPost.LikedBy.Count >= i_MinLikesCount)
                     {
-                        if (currentPost.PictureURL == null)
-                        {
-                            postsListBox.Items.Add(currentPost);
-                        }
-                        else
-                        {
-                            picturesListBox.Items.Add(currentPost);
-                        }
+                        addItemToCollectionItemsTabControlListBoxes(currentPost);
                     }
                 }
             }
