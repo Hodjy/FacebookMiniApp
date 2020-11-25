@@ -452,7 +452,6 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         private void commentButton_Click(object sender, EventArgs e)
         {
             string comment = pommentTextBox.Text;
-            string errorMsg = "An error occured while trying to comment";
             Post selectedPost = postsListBox.SelectedItem as Post;
 
             try
