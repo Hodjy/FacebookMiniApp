@@ -7,26 +7,22 @@ using FacebookWrapper.ObjectModel;
 
 namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
-    public class ConnectionManager
+    public static class ConnectionManager
     {
-        private static LoginResult m_LoginResult;
-        private static User m_LoggedInUser;
+        private static LoginResult sm_LoginResult;
+        private static User sm_LoggedInUser;
 
-        public ConnectionManager()
+        public static LoginResult LoginResult
         {
+            get { return sm_LoginResult; }
         }
 
-        public LoginResult LoginResult
+        public static User LoggedInUser
         {
-            get { return m_LoginResult; }
+            get { return sm_LoggedInUser; }
         }
 
-        public User LoggedInUser
-        {
-            get { return m_LoggedInUser; }
-        }
-
-        public string LogInUser(string i_AppID)
+        public static string LogInUser(string i_AppID)
         {
             string errorMessage = string.Empty;
 
@@ -36,11 +32,11 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             return errorMessage;
         }
 
-        private void commitLogin(string i_AppID)
+        private static void commitLogin(string i_AppID)
         {
-            if (m_LoginResult == null)
+            if (sm_LoginResult == null)
             {
-                m_LoginResult = FacebookService.Login(i_AppID,
+                sm_LoginResult = FacebookService.Login(i_AppID,
                     "public_profile",
                     "email",
                     "user_birthday",
@@ -49,8 +45,6 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                     "user_link",
                     "user_tagged_places",
                     "user_videos",
-                    //"publish_to_groups",
-                    //"groups_access_member_info",
                     "user_friends",
                     "user_events",
                     "user_likes",
@@ -59,37 +53,36 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                     "user_posts",
                     "user_hometown",
                     "user_managed_groups",
-                    //"read_page_mailboxes",
                     "user_status"
                     );
                 
             }
         }
 
-        private string setLoggedInUser()
+        private static string setLoggedInUser()
         {
             string loginError = string.Empty;
 
-            if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
+            if (!string.IsNullOrEmpty(sm_LoginResult.AccessToken))
             {
-                m_LoggedInUser = m_LoginResult.LoggedInUser;
+                sm_LoggedInUser = sm_LoginResult.LoggedInUser;
             }
             else
             {
-                loginError = m_LoginResult.ErrorMessage;
+                loginError = sm_LoginResult.ErrorMessage;
             }
 
             return loginError;
         }
 
-        public void LogOutUser()
+        public static void LogOutUser()
         {
-            m_LoginResult = null;
+            sm_LoginResult = null;
         }
 
-        public string GetProfilePic()
+        public static string GetProfilePic()
         {
-            string pictureURL = m_LoggedInUser.PictureNormalURL;
+            string pictureURL = sm_LoggedInUser.PictureNormalURL;
             Console.WriteLine(pictureURL);
 
             return pictureURL;
