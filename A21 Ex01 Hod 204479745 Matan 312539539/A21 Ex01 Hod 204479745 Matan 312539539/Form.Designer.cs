@@ -1,6 +1,6 @@
 ﻿namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
-    partial class Form
+    partial class MainFacebookForm
     {
         /// <summary>
         /// Required designer variable.
@@ -134,7 +134,7 @@
             this.tabPage1.Controls.Add(this.friendsListBox);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(204, 238);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Friends";
@@ -156,7 +156,7 @@
             this.tabPage2.Controls.Add(this.albumsListBox);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(204, 238);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Albums";
@@ -329,7 +329,7 @@
             // 
             this.myPostsButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.myPostsButton.Location = new System.Drawing.Point(353, 218);
-            this.myPostsButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.myPostsButton.Margin = new System.Windows.Forms.Padding(2);
             this.myPostsButton.Name = "myPostsButton";
             this.myPostsButton.Size = new System.Drawing.Size(87, 25);
             this.myPostsButton.TabIndex = 4;
@@ -353,7 +353,7 @@
             this.tabPage5.Controls.Add(this.postsListBox);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage5.Size = new System.Drawing.Size(192, 216);
             this.tabPage5.TabIndex = 0;
             this.tabPage5.Text = "Posts";
@@ -364,7 +364,7 @@
             this.tabPage6.Controls.Add(this.picturesListBox);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage6.Size = new System.Drawing.Size(192, 216);
             this.tabPage6.TabIndex = 1;
             this.tabPage6.Text = "Pictures";
@@ -384,7 +384,7 @@
             // postsDateTimePicker
             // 
             this.postsDateTimePicker.Location = new System.Drawing.Point(240, 95);
-            this.postsDateTimePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.postsDateTimePicker.Margin = new System.Windows.Forms.Padding(2);
             this.postsDateTimePicker.MinDate = new System.DateTime(2004, 1, 1, 0, 0, 0, 0);
             this.postsDateTimePicker.Name = "postsDateTimePicker";
             this.postsDateTimePicker.Size = new System.Drawing.Size(185, 20);
@@ -393,7 +393,7 @@
             // dateFilterButton
             // 
             this.dateFilterButton.Location = new System.Drawing.Point(240, 119);
-            this.dateFilterButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateFilterButton.Margin = new System.Windows.Forms.Padding(2);
             this.dateFilterButton.Name = "dateFilterButton";
             this.dateFilterButton.Size = new System.Drawing.Size(184, 22);
             this.dateFilterButton.TabIndex = 7;
@@ -404,7 +404,7 @@
             // likesNumericUpDown
             // 
             this.likesNumericUpDown.Location = new System.Drawing.Point(240, 23);
-            this.likesNumericUpDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.likesNumericUpDown.Margin = new System.Windows.Forms.Padding(2);
             this.likesNumericUpDown.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -417,7 +417,7 @@
             // likesFilterButton
             // 
             this.likesFilterButton.Location = new System.Drawing.Point(240, 47);
-            this.likesFilterButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.likesFilterButton.Margin = new System.Windows.Forms.Padding(2);
             this.likesFilterButton.Name = "likesFilterButton";
             this.likesFilterButton.Size = new System.Drawing.Size(184, 22);
             this.likesFilterButton.TabIndex = 9;
@@ -425,12 +425,12 @@
             this.likesFilterButton.UseVisualStyleBackColor = true;
             this.likesFilterButton.Click += new System.EventHandler(this.likesFilterButton_Click);
             // 
-            // Form1
+            // MainFacebookForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(847, 497);
+            this.ClientSize = new System.Drawing.Size(1291, 507);
             this.Controls.Add(this.likesFilterButton);
             this.Controls.Add(this.likesNumericUpDown);
             this.Controls.Add(this.dateFilterButton);
@@ -440,7 +440,7 @@
             this.Controls.Add(this.postsGroupBox);
             this.Controls.Add(this.userCollectionsTabControl);
             this.Controls.Add(this.UserGroupBox);
-            this.Name = "Form1";
+            this.Name = "MainFacebookForm";
             this.Text = "Mini Facebook - User";
             this.Load += new System.EventHandler(this.Form_Load);
             this.UserGroupBox.ResumeLayout(false);

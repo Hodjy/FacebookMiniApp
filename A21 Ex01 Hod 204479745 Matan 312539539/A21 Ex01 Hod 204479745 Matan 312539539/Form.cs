@@ -11,16 +11,16 @@ using FacebookWrapper.ObjectModel;
 
 namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
-    public partial class Form : System.Windows.Forms.Form
+    public partial class MainFacebookForm : System.Windows.Forms.Form
     {
-        public Form()
+        public MainFacebookForm()
         {
             InitializeComponent();
         }
 
         private void Form_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void logInUser()
@@ -29,7 +29,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
             try
             {
-                loginError = ConnectionManager.LogInUser("3925570110805927");
+                FacebookBasicMethods.LogInUser();
             }
             catch (Exception e)
             {
@@ -51,7 +51,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void logOutUser()
         {
-            ConnectionManager.LogOutUser();
+            FacebookBasicMethods.LogOutUser();
             clearAllData();
             connectionButton.Text = "Log In";
         }

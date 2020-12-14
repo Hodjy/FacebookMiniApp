@@ -5,17 +5,17 @@ using System.Windows.Forms;
 
 namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
-    static class Program
+    public static class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        public static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form());
+            Application.Run(new MainFacebookForm());
         }
     }
 }
