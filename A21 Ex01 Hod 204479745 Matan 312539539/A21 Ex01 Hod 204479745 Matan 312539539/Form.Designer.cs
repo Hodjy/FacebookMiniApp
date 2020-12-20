@@ -28,6 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.Label commentsCountLabel;
+            System.Windows.Forms.Label likedByCountLabel;
+            System.Windows.Forms.Label postMessageLabel;
+            System.Windows.Forms.Label pictureURLLabel;
             this.UserGroupBox = new System.Windows.Forms.GroupBox();
             this.connectionButton = new System.Windows.Forms.Button();
             this.userLabel = new System.Windows.Forms.Label();
@@ -60,6 +65,15 @@
             this.dateFilterButton = new System.Windows.Forms.Button();
             this.likesNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.likesFilterButton = new System.Windows.Forms.Button();
+            this.commentsCountTextBox = new System.Windows.Forms.TextBox();
+            this.likedByCountTextBox = new System.Windows.Forms.TextBox();
+            this.postMessageTextBox = new System.Windows.Forms.TextBox();
+            this.pictureURLPictureBox = new System.Windows.Forms.PictureBox();
+            this.selectedPostInformationBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            commentsCountLabel = new System.Windows.Forms.Label();
+            likedByCountLabel = new System.Windows.Forms.Label();
+            postMessageLabel = new System.Windows.Forms.Label();
+            pictureURLLabel = new System.Windows.Forms.Label();
             this.UserGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).BeginInit();
             this.userCollectionsTabControl.SuspendLayout();
@@ -73,7 +87,45 @@
             this.tabPage5.SuspendLayout();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.likesNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureURLPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.selectedPostInformationBindingSource)).BeginInit();
             this.SuspendLayout();
+            // 
+            // commentsCountLabel
+            // 
+            commentsCountLabel.AutoSize = true;
+            commentsCountLabel.Location = new System.Drawing.Point(936, 351);
+            commentsCountLabel.Name = "commentsCountLabel";
+            commentsCountLabel.Size = new System.Drawing.Size(59, 13);
+            commentsCountLabel.TabIndex = 10;
+            commentsCountLabel.Text = "Comments:";
+            // 
+            // likedByCountLabel
+            // 
+            likedByCountLabel.AutoSize = true;
+            likedByCountLabel.Location = new System.Drawing.Point(1131, 351);
+            likedByCountLabel.Name = "likedByCountLabel";
+            likedByCountLabel.Size = new System.Drawing.Size(35, 13);
+            likedByCountLabel.TabIndex = 12;
+            likedByCountLabel.Text = "Likes:";
+            // 
+            // postMessageLabel
+            // 
+            postMessageLabel.AutoSize = true;
+            postMessageLabel.Location = new System.Drawing.Point(843, 299);
+            postMessageLabel.Name = "postMessageLabel";
+            postMessageLabel.Size = new System.Drawing.Size(77, 13);
+            postMessageLabel.TabIndex = 14;
+            postMessageLabel.Text = "Post Message:";
+            // 
+            // pictureURLLabel
+            // 
+            pictureURLLabel.AutoSize = true;
+            pictureURLLabel.Location = new System.Drawing.Point(927, 87);
+            pictureURLLabel.Name = "pictureURLLabel";
+            pictureURLLabel.Size = new System.Drawing.Size(68, 13);
+            pictureURLLabel.TabIndex = 16;
+            pictureURLLabel.Text = "Picture URL:";
             // 
             // UserGroupBox
             // 
@@ -425,12 +477,58 @@
             this.likesFilterButton.UseVisualStyleBackColor = true;
             this.likesFilterButton.Click += new System.EventHandler(this.likesFilterButton_Click);
             // 
+            // commentsCountTextBox
+            // 
+            this.commentsCountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.selectedPostInformationBindingSource, "CommentsCount", true));
+            this.commentsCountTextBox.Location = new System.Drawing.Point(1001, 348);
+            this.commentsCountTextBox.Name = "commentsCountTextBox";
+            this.commentsCountTextBox.Size = new System.Drawing.Size(42, 20);
+            this.commentsCountTextBox.TabIndex = 11;
+            // 
+            // likedByCountTextBox
+            // 
+            this.likedByCountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.selectedPostInformationBindingSource, "LikedByCount", true));
+            this.likedByCountTextBox.Location = new System.Drawing.Point(1172, 348);
+            this.likedByCountTextBox.Name = "likedByCountTextBox";
+            this.likedByCountTextBox.Size = new System.Drawing.Size(42, 20);
+            this.likedByCountTextBox.TabIndex = 13;
+            // 
+            // postMessageTextBox
+            // 
+            this.postMessageTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.selectedPostInformationBindingSource, "PostMessage", true));
+            this.postMessageTextBox.Location = new System.Drawing.Point(939, 296);
+            this.postMessageTextBox.Multiline = true;
+            this.postMessageTextBox.Name = "postMessageTextBox";
+            this.postMessageTextBox.Size = new System.Drawing.Size(275, 46);
+            this.postMessageTextBox.TabIndex = 15;
+            // 
+            // pictureURLPictureBox
+            // 
+            this.pictureURLPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.selectedPostInformationBindingSource, "PictureURL", true));
+            this.pictureURLPictureBox.Location = new System.Drawing.Point(1001, 87);
+            this.pictureURLPictureBox.Name = "pictureURLPictureBox";
+            this.pictureURLPictureBox.Size = new System.Drawing.Size(156, 109);
+            this.pictureURLPictureBox.TabIndex = 17;
+            this.pictureURLPictureBox.TabStop = false;
+            // 
+            // selectedPostInformationBindingSource
+            // 
+            this.selectedPostInformationBindingSource.DataSource = typeof(A21_Ex01_Hod_204479745_Matan_312539539.SelectedPost);
+            // 
             // MainFacebookForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(1291, 507);
+            this.Controls.Add(pictureURLLabel);
+            this.Controls.Add(this.pictureURLPictureBox);
+            this.Controls.Add(commentsCountLabel);
+            this.Controls.Add(this.commentsCountTextBox);
+            this.Controls.Add(likedByCountLabel);
+            this.Controls.Add(this.likedByCountTextBox);
+            this.Controls.Add(postMessageLabel);
+            this.Controls.Add(this.postMessageTextBox);
             this.Controls.Add(this.likesFilterButton);
             this.Controls.Add(this.likesNumericUpDown);
             this.Controls.Add(this.dateFilterButton);
@@ -458,7 +556,10 @@
             this.tabPage5.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.likesNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureURLPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.selectedPostInformationBindingSource)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -496,6 +597,11 @@
         private System.Windows.Forms.Button dateFilterButton;
         private System.Windows.Forms.NumericUpDown likesNumericUpDown;
         private System.Windows.Forms.Button likesFilterButton;
+        private System.Windows.Forms.BindingSource selectedPostInformationBindingSource;
+        private System.Windows.Forms.TextBox commentsCountTextBox;
+        private System.Windows.Forms.TextBox likedByCountTextBox;
+        private System.Windows.Forms.TextBox postMessageTextBox;
+        private System.Windows.Forms.PictureBox pictureURLPictureBox;
     }
 }
 

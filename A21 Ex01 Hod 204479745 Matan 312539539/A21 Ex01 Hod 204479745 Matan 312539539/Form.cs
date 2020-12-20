@@ -29,7 +29,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
             try
             {
-                FacebookBasicMethods.LogInUser();
+                loginError = FacebookBasicMethods.LogInUser();
             }
             catch (Exception e)
             {
@@ -44,7 +44,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             {
                 Text = string.Format("Mini Facebook - {0}", ConnectionManager.LoggedInUser.Name);
                 connectionButton.Text = "Log Out";
-                userLabel.Text = ConnectionManager.LoggedInUser.Name;
+                userLabel.Text = FacebookBasicMethods.LoggedInUserName;
                 fetchUserInfo();
             }
         }
@@ -58,12 +58,19 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void fetchUserInfo()
         {
-            profilePictureBox.LoadAsync(ConnectionManager.LoggedInUser.PictureNormalURL);
-            updateCollectionsItemsTabControllListBoxes(ConnectionManager.LoggedInUser.Posts); // needs to be converted to nomral Fetch<T>
-            fetch<User>(ConnectionManager.LoggedInUser.Friends, friendsListBox);
-            fetch<Event>(ConnectionManager.LoggedInUser.Events, eventsListBox);
-            fetch<Album>(ConnectionManager.LoggedInUser.Albums, albumsListBox);
-            fetch<Group>(ConnectionManager.LoggedInUser.Groups, groupsListBox);
+            profilePictureBox.LoadAsync(FacebookBasicMethods.LoggedInUserProfilePicture);
+            FacebookObjectCollection<Post> userPosts = FacebookBasicMethods.GetUserWallPosts();
+            FacebookObjectCollection<Post> userPhotos = FacebookBasicMethods.GetUserWallPhotos();
+            FacebookObjectCollection<User> userFriends = FacebookBasicMethods.UserFriends;
+            FacebookObjectCollection<Event> userEvents = FacebookBasicMethods.UserEvents;
+            FacebookObjectCollection<Album> userAlbums = FacebookBasicMethods.UserAlbums;
+            FacebookObjectCollection<Group> userGroups = FacebookBasicMethods.UserGroups;
+            addItemsToListBox<Post>(userPosts, postsListBox);    //updateCollectionsItemsTabControllListBoxes(PostsNamesAndIDs); //ConnectionManager.LoggedInUser.Posts
+            addItemsToListBox<Post>(userPhotos, picturesListBox);
+            addItemsToListBox<User>(userFriends, friendsListBox);
+            addItemsToListBox<Event>(userEvents, eventsListBox);
+            addItemsToListBox<Album>(userAlbums, albumsListBox);
+            addItemsToListBox<Group>(userGroups, groupsListBox);
         }
 
         private void clearAllData()
@@ -80,14 +87,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             groupsListBox.Items.Clear();
             eventsListBox.Items.Clear();
             postsListBox.Items.Clear();
-        }
-
-        private void clearAllSelectedPostInformation()
-        {
-            postPictureBox.CancelAsync();
-            postTextBox.Clear();
-            postCommentsListBox.Items.Clear();
-            pommentTextBox.Clear();
+            picturesListBox.Items.Clear();
         }
 
         private void updateCollectionsItemsTabControllListBoxes(FacebookObjectCollection<Post> i_PostsCollection)
@@ -137,7 +137,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             picturesListBox.Items.Clear();
         }
 
-        private void fetch<T>(FacebookObjectCollection<T> i_Collection, ListBox i_ListBoxToUpdate)
+        private void addItemsToListBox<T>(FacebookObjectCollection<T> i_Collection, ListBox i_ListBoxToUpdate)
         {
             try
             {
@@ -157,6 +157,8 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
 
         }
+
+        //Replaced by DataBinding.
 
         private void updateListBox(ListBox i_ListBoxToUpdate)
         {
@@ -206,7 +208,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             postTextBox.Text = i_SelectedItem.Message;
             try
             {
-                fetch<Comment>(i_SelectedItem.Comments, postCommentsListBox);
+                addItemsToListBox<Comment>(i_SelectedItem.Comments, postCommentsListBox);
             }
             catch (Exception e)
             {
@@ -248,6 +250,17 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         }
 
+        private void clearAllSelectedPostInformation()
+        {
+            postPictureBox.CancelAsync();
+            postTextBox.Clear();
+            postCommentsListBox.Items.Clear();
+            pommentTextBox.Clear();
+        }
+
+
+        //
+
         private void updateLikeButtonName(PostedItem i_SelectedItem)
         {
             try
@@ -279,6 +292,8 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
             return isLiked;
         }
+
+        //Into FilterMethods Class
 
         private void updateTabControlByDate(FacebookObjectCollection<Post> i_PostsToFilter, DateTime i_SelectedDate)
         {
@@ -360,7 +375,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                 try
                 {
                     Album selectedAlbum = albumsListBox.SelectedItem as Album;
-                    fetch<Photo>(selectedAlbum.Photos, picturesListBox);
+                    addItemsToListBox<Photo>(selectedAlbum.Photos, picturesListBox);
                 }
                 catch (Exception ex)
                 {
