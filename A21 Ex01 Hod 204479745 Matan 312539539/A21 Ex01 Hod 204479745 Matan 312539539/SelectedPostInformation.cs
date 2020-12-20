@@ -10,15 +10,14 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
     public class SelectedPost
     {
         private static PostedItem m_SelectedItem = null;
-        private  string m_PictureURL = string.Empty; // Needs to determin what type of object in order to get. Might do Meth+Adaptor.
-        private  string m_PostMessage = string.Empty;
+        private string m_PictureURL = string.Empty; // Needs to determine what type of object in order to get. (All)Might do Meth+Adapter.
+        private string m_PostMessage = string.Empty;
 
-        public SelectedPost()
+        private SelectedPost()
         {
-
         }
 
-        public  FacebookObjectCollection<Comment> Comments
+        public FacebookObjectCollection<Comment> Comments
         {
             get
             {
@@ -28,7 +27,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
         }
         
-        public  int LikedByCount
+        public int LikedByCount
         {
             get
             {
@@ -38,7 +37,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
         }
 
-        public  int CommentsCount
+        public int CommentsCount
         {
             get
             {
@@ -48,7 +47,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
         }
 
-        public  string PostMessage
+        public string PostMessage
         {
             get
             {
@@ -58,7 +57,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
         }
 
-        public  string PictureURL
+        public string PictureURL
         {
             get
             {
@@ -68,7 +67,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
         }
 
-        public  bool IsLikedByUser(User i_UserToCheck)
+        public bool IsLikedByUser(User i_UserToCheck)
         {
             bool isLiked = false;
 
@@ -82,25 +81,25 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             return isLiked;
         }
 
-        public  void CommentOnPost(string i_TextToComment)
+        public void CommentOnPost(string i_TextToComment)
         {
             checkAndThrowExeptionIfSelectedItemIsNull();
             m_SelectedItem.Comment(i_TextToComment);
         }
 
-        public  void LikePost()
+        public void LikePost()
         {
             checkAndThrowExeptionIfSelectedItemIsNull();
             m_SelectedItem.Like();
         }
 
-        public  void UnlikePost()
+        public void UnlikePost()
         {
             checkAndThrowExeptionIfSelectedItemIsNull();
             m_SelectedItem.Unlike();
         }
 
-        public  void ChangeSelectedItem(PostedItem i_NewSelectedItem, string i_PictureURL, string i_Message)
+        public void ChangeSelectedItem(PostedItem i_NewSelectedItem, string i_PictureURL, string i_Message)
         {
             m_SelectedItem = i_NewSelectedItem;
             m_PictureURL = i_PictureURL;
@@ -114,7 +113,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             m_PostMessage = string.Empty;
         }
 
-        private  void checkAndThrowExeptionIfSelectedItemIsNull()
+        private void checkAndThrowExeptionIfSelectedItemIsNull()
         {
             string errMsg = "SelectedItem is null.";
 

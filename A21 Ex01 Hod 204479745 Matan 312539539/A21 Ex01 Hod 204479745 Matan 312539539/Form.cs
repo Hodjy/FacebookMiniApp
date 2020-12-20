@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
 
 namespace A21_Ex01_Hod_204479745_Matan_312539539
@@ -42,7 +40,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
             else
             {
-                Text = string.Format("Mini Facebook - {0}", ConnectionManager.LoggedInUser.Name);
+                Text = string.Format("Mini Facebook - {0}", FacebookBasicMethods.LoggedInUserName);
                 connectionButton.Text = "Log Out";
                 userLabel.Text = FacebookBasicMethods.LoggedInUserName;
                 fetchUserInfo();
@@ -58,19 +56,17 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void fetchUserInfo()
         {
+            loadUserProfilePicture();
+            addItemsToListBox<Post>(FacebookBasicMethods.UserWallPosts, postsListBox);
+            addItemsToListBox<User>(FacebookBasicMethods.UserFriends, friendsListBox);
+            addItemsToListBox<Event>(FacebookBasicMethods.UserEvents, eventsListBox);
+            addItemsToListBox<Album>(FacebookBasicMethods.UserAlbums, albumsListBox);
+            addItemsToListBox<Group>(FacebookBasicMethods.UserGroups, groupsListBox);
+        }
+
+        private void loadUserProfilePicture()
+        {
             profilePictureBox.LoadAsync(FacebookBasicMethods.LoggedInUserProfilePicture);
-            FacebookObjectCollection<Post> userPosts = FacebookBasicMethods.GetUserWallPosts();
-            FacebookObjectCollection<Post> userPhotos = FacebookBasicMethods.GetUserWallPhotos();
-            FacebookObjectCollection<User> userFriends = FacebookBasicMethods.UserFriends;
-            FacebookObjectCollection<Event> userEvents = FacebookBasicMethods.UserEvents;
-            FacebookObjectCollection<Album> userAlbums = FacebookBasicMethods.UserAlbums;
-            FacebookObjectCollection<Group> userGroups = FacebookBasicMethods.UserGroups;
-            addItemsToListBox<Post>(userPosts, postsListBox);    //updateCollectionsItemsTabControllListBoxes(PostsNamesAndIDs); //ConnectionManager.LoggedInUser.Posts
-            addItemsToListBox<Post>(userPhotos, picturesListBox);
-            addItemsToListBox<User>(userFriends, friendsListBox);
-            addItemsToListBox<Event>(userEvents, eventsListBox);
-            addItemsToListBox<Album>(userAlbums, albumsListBox);
-            addItemsToListBox<Group>(userGroups, groupsListBox);
         }
 
         private void clearAllData()
@@ -82,12 +78,17 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void clearAllListBoxes()
         {
-            friendsListBox.Items.Clear();
-            albumsListBox.Items.Clear();
-            groupsListBox.Items.Clear();
-            eventsListBox.Items.Clear();
-            postsListBox.Items.Clear();
-            picturesListBox.Items.Clear();
+            clearListBoxDataAndRefresh(friendsListBox);
+            clearListBoxDataAndRefresh(albumsListBox);
+            clearListBoxDataAndRefresh(groupsListBox);
+            clearListBoxDataAndRefresh(eventsListBox);
+            clearListBoxDataAndRefresh(postsListBox);
+        }
+
+        private void clearListBoxDataAndRefresh(ListBox i_ListBoxToClear)
+        {
+            i_ListBoxToClear.Items.Clear();
+            i_ListBoxToClear.Refresh();
         }
 
         private void updateCollectionsItemsTabControllListBoxes(FacebookObjectCollection<Post> i_PostsCollection)
@@ -97,20 +98,12 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             {
                 foreach (Post item in i_PostsCollection) // add text posts to postsListBox and picture posts to picturesListBox
                 {
-                    if (item.PictureURL == null)
-                    {
-                        postsListBox.Items.Add(item);
-                    }
-                    else
-                    {
-                        picturesListBox.Items.Add(item);
-                    }
+                    postsListBox.Items.Add(item);
                 }
 
                 if (i_PostsCollection.Count == 0)
                 {
                     postsListBox.Items.Add("No posts to show");
-                    picturesListBox.Items.Add("No pictures to show");
                 }
             }
             catch (Exception e)
@@ -121,20 +114,12 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void addItemToCollectionItemsTabControlListBoxes(Post i_CurrentPost)
         {
-            if (i_CurrentPost.PictureURL == null)
-            {
-                postsListBox.Items.Add(i_CurrentPost);
-            }
-            else
-            {
-                picturesListBox.Items.Add(i_CurrentPost);
-            }
+            postsListBox.Items.Add(i_CurrentPost);
         }
 
         private void clearCollectionsItemsTabControlListBoxes()
         {
             postsListBox.Items.Clear();
-            picturesListBox.Items.Clear();
         }
 
         private void addItemsToListBox<T>(FacebookObjectCollection<T> i_Collection, ListBox i_ListBoxToUpdate)
@@ -146,9 +131,9 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                     i_ListBoxToUpdate.Items.Add(evnt);
                 }
 
-                if (i_Collection.Count() == 0)
+                if (i_Collection.Count == 0)
                 {
-                    i_ListBoxToUpdate.Items.Add(string.Format("{0} has no {1}", ConnectionManager.LoggedInUser.Name, typeof(T).Name));
+                    i_ListBoxToUpdate.Items.Add(string.Format("{0} has no {1}", FacebookBasicMethods.LoggedInUserName, typeof(T).Name));
                 }
             }
             catch (Exception e)
@@ -222,9 +207,10 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             updateLikesLabel(i_SelectedItem);
             updateCommentsLabel(i_SelectedItem);
-            updateLikeButtonName(i_SelectedItem);
+            //updateLikeButtonName(i_SelectedItem);
         }
 
+        // replaced with data binding
         private void updateCommentsLabel(PostedItem i_SelectedItem)
         {
             try
@@ -237,6 +223,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
         }
 
+        // replaced with data binding
         private void updateLikesLabel(PostedItem i_SelectedItem)
         {
             try
@@ -250,22 +237,11 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         }
 
-        private void clearAllSelectedPostInformation()
-        {
-            postPictureBox.CancelAsync();
-            postTextBox.Clear();
-            postCommentsListBox.Items.Clear();
-            pommentTextBox.Clear();
-        }
-
-
-        //
-
-        private void updateLikeButtonName(PostedItem i_SelectedItem)
+        private void updateLikeButtonName(SelectedPost i_SelectedItem)
         {
             try
             {
-                if (isLikedByUser(i_SelectedItem, ConnectionManager.LoggedInUser))
+                if (i_SelectedItem.IsLikedByUser(ConnectionManager.LoggedInUser))
                 {
                     likeButton.Text = "Dislike";
                 }
@@ -281,16 +257,12 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         }
 
-        private bool isLikedByUser(PostedItem i_PostToCheck, User i_UserToCheck)
+        private void clearAllSelectedPostInformation()
         {
-            bool isLiked = false;
-
-            if (i_PostToCheck.LikedBy.Contains(i_UserToCheck))
-            {
-                isLiked = true;
-            }
-
-            return isLiked;
+            postPictureBox.CancelAsync();
+            postTextBox.Clear();
+            postCommentsListBox.Items.Clear();
+            commentTextBox.Clear();
         }
 
         //Into FilterMethods Class
@@ -352,18 +324,24 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void friendsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (friendsListBox.SelectedItem is User)
+            //if (friendsListBox.SelectedItem is User)
+            //{
+            //    try
+            //    {
+            //        User selectedFriend = friendsListBox.SelectedItem as User;
+            //        addItemsToListBox<Post>(selectedFriend.WallPosts, postsListBox);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show("There was a problem receiving Friends.");
+            //    }
+            //}
+            if (friendsListBox.SelectedItem is IPostedCollectionsAdapter)
             {
-                try
-                {
-                    User selectedFriend = friendsListBox.SelectedItem as User;
-                    updateCollectionsItemsTabControllListBoxes(selectedFriend.WallPosts);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("There was a problem receiving Friends.");
-                }
+                IPostedCollectionsAdapter selectedItem = friendsListBox.SelectedItem as IPostedCollectionsAdapter;
             }
+
+            //addItemsToListBox<Post>(selectedItem.GetPosts(), postsListBox);
         }
 
         private void albumsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -375,7 +353,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                 try
                 {
                     Album selectedAlbum = albumsListBox.SelectedItem as Album;
-                    addItemsToListBox<Photo>(selectedAlbum.Photos, picturesListBox);
+                    addItemsToListBox<Photo>(selectedAlbum.Photos, postsListBox);
                 }
                 catch (Exception ex)
                 {
@@ -391,7 +369,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                 try
                 {
                     Group selectedGroup = groupsListBox.SelectedItem as Group;
-                    updateCollectionsItemsTabControllListBoxes(selectedGroup.WallPosts);
+                    addItemsToListBox<Post>(selectedGroup.WallPosts, postsListBox);
                 }
                 catch (Exception ex)
                 {
@@ -407,7 +385,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                 try
                 {
                     Event selectedEvent = eventsListBox.SelectedItem as Event;
-                    updateCollectionsItemsTabControllListBoxes(selectedEvent.WallPosts);
+                    addItemsToListBox<Post>(selectedEvent.WallPosts, postsListBox);
                 }
                 catch (Exception ex)
                 {
@@ -433,28 +411,23 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             updateListBox(postsListBox);
         }
 
-        private void picturesListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            updateListBox(picturesListBox);
-        }
-
         private void likeButton_Click(object sender, EventArgs e)
         {
-            Post selectedPost = postsListBox.SelectedItem as Post;
+            SelectedPost selectedPost = postsListBox.SelectedItem as SelectedPost;
 
             try
             {
                 if (selectedPost != null)
                 {
-                    if (isLikedByUser(selectedPost, ConnectionManager.LoggedInUser))
+                    if (selectedPost.IsLikedByUser(ConnectionManager.LoggedInUser))
                     {
-                        selectedPost.Unlike();
-                        updatePostedItemInformation(selectedPost);
+                        selectedPost.UnlikePost();
+                        //updatePostedItemInformation(selectedPost);
                     }
                     else
                     {
-                        selectedPost.Like();
-                        updatePostedItemInformation(selectedPost);
+                        selectedPost.LikePost();
+                        //updatePostedItemInformation(selectedPost);
                     }
                 }
             }
@@ -466,7 +439,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void commentButton_Click(object sender, EventArgs e)
         {
-            string comment = pommentTextBox.Text;
+            string comment = commentTextBox.Text;
             Post selectedPost = postsListBox.SelectedItem as Post;
 
             try

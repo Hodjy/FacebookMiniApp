@@ -9,7 +9,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
     public static class FacebookBasicMethods
     {
-        public static SelectedPost m_SelectedPost = new SelectedPost();
+        public static SelectedPost m_SelectedPost;
 
         public static string LoggedInUserName
         {
@@ -41,30 +41,12 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             ConnectionManager.LogOutUser();
         }
 
-        private static FacebookObjectCollection<Post> getUserWallPostsOrWallPhotos(bool i_isStoringPicturelessPost)
+        public static FacebookObjectCollection<Post> UserWallPosts
         {
-            FacebookObjectCollection<Post> userWallPostsCollection = ConnectionManager.LoggedInUser.WallPosts;
-            FacebookObjectCollection<Post> postsToReturn = new FacebookObjectCollection<Post>();
-
-            foreach (Post item in userWallPostsCollection)
+            get
             {
-                if((item.PictureURL == null) == i_isStoringPicturelessPost)
-                {
-                    postsToReturn.Add(item);
-                }
+                return ConnectionManager.LoggedInUser.WallPosts;
             }
-
-            return postsToReturn;
-        }
-
-        public static FacebookObjectCollection<Post> GetUserWallPosts()
-        {
-            return getUserWallPostsOrWallPhotos(true);
-        }
-
-        public static FacebookObjectCollection<Post> GetUserWallPhotos()
-        {
-            return getUserWallPostsOrWallPhotos(false);
         }
 
         public static FacebookObjectCollection<User> UserFriends
