@@ -9,7 +9,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
-    public partial class MainFacebookForm : System.Windows.Forms.Form
+    public partial class MainFacebookForm : Form
     {
         public MainFacebookForm()
         {
@@ -82,7 +82,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             clearListBoxDataAndRefresh(albumsListBox);
             clearListBoxDataAndRefresh(groupsListBox);
             clearListBoxDataAndRefresh(eventsListBox);
-            clearListBoxDataAndRefresh(postsListBox);
+            //clearListBoxDataAndRefresh(postsListBox);
         }
 
         private void clearListBoxDataAndRefresh(ListBox i_ListBoxToClear)
@@ -143,8 +143,20 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         }
 
-        //Replaced by DataBinding.
+        private void addItemToSelected(Post i_PostToGet = null, Photo i_PhotoToGet = null)
+        {
+            SelectedPost Post = new SelectedPost();
+            if (i_PostToGet != null)
+            {
+                Post.ChangeSelectedItem(i_PostToGet, i_PostToGet.PictureURL, i_PostToGet.Message);
+            }
+            else if (i_PhotoToGet != null)
+            {
+                Post.ChangeSelectedItem(i_PhotoToGet, i_PhotoToGet.PictureNormalURL, i_PhotoToGet.Name);
+            }
+        }
 
+        // Replaced by DataBinding.
         private void updateListBox(ListBox i_ListBoxToUpdate)
         {
             Post selectedPost;
@@ -170,6 +182,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
         }
 
+        // Replaced by DataBinding.
         private void fetchPostedItemDetails(PostedItem i_SelectedItem, string i_PictureURL = null)
         {
             // show post picture, if there isnt one, show the poster profile picture
@@ -202,7 +215,8 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
             updatePostedItemInformation(i_SelectedItem);
         }
-
+        
+        // Replaced by DataBinding.
         private void updatePostedItemInformation(PostedItem i_SelectedItem)
         {
             updateLikesLabel(i_SelectedItem);
@@ -210,7 +224,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             //updateLikeButtonName(i_SelectedItem);
         }
 
-        // replaced with data binding
+        // Replaced by DataBinding.
         private void updateCommentsLabel(PostedItem i_SelectedItem)
         {
             try
@@ -223,7 +237,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
         }
 
-        // replaced with data binding
+        // Replaced by DataBinding.
         private void updateLikesLabel(PostedItem i_SelectedItem)
         {
             try
@@ -286,7 +300,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                 MessageBox.Show("There was problem while filtering posts");
             }
         }
-
+        
         private void updateTabControlByLikes(FacebookObjectCollection<Post> i_PostsToFilter, int i_MinLikesCount)
         {
             clearCollectionsItemsTabControlListBoxes();
@@ -324,24 +338,18 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void friendsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //if (friendsListBox.SelectedItem is User)
-            //{
-            //    try
-            //    {
-            //        User selectedFriend = friendsListBox.SelectedItem as User;
-            //        addItemsToListBox<Post>(selectedFriend.WallPosts, postsListBox);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show("There was a problem receiving Friends.");
-            //    }
-            //}
-            if (friendsListBox.SelectedItem is IPostedCollectionsAdapter)
+            if (friendsListBox.SelectedItem is User)
             {
-                IPostedCollectionsAdapter selectedItem = friendsListBox.SelectedItem as IPostedCollectionsAdapter;
+                try
+                {
+                    User selectedFriend = friendsListBox.SelectedItem as User;
+                    addItemsToListBox<Post>(selectedFriend.WallPosts, postsListBox);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There was a problem receiving Friends.");
+                }
             }
-
-            //addItemsToListBox<Post>(selectedItem.GetPosts(), postsListBox);
         }
 
         private void albumsListBox_SelectedIndexChanged(object sender, EventArgs e)

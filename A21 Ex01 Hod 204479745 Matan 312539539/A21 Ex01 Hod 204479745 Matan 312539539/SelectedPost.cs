@@ -10,11 +10,13 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
     public class SelectedPost
     {
         private static PostedItem m_SelectedItem = null;
-        private string m_PictureURL = string.Empty; // Needs to determine what type of object in order to get. (All)Might do Meth+Adapter.
-        private string m_PostMessage = string.Empty;
+        private string m_PictureURL; // Needs to determine what type of object in order to get. (All)Might do Meth+Adapter.
+        private string m_PostMessage;
 
-        private SelectedPost()
+        public SelectedPost()
         {
+            m_PictureURL = string.Empty;
+            m_PostMessage = string.Empty;
         }
 
         public FacebookObjectCollection<Comment> Comments
