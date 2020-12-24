@@ -11,9 +11,12 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
     public partial class MainFacebookForm : Form
     {
+        LoggedInUser m_LoggedInUser;
+
         public MainFacebookForm()
         {
             InitializeComponent();
+            fetchUserInfo();
         }
 
         private void Form_Load(object sender, EventArgs e)
@@ -27,7 +30,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
             try
             {
-                loginError = FacebookBasicMethods.LogInUser();
+                loginError = Facade.LogInUser();
             }
             catch (Exception e)
             {
@@ -40,7 +43,8 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
             else
             {
-                Text = string.Format("Mini Facebook - {0}", FacebookBasicMethods.LoggedInUserName);
+                m_LoggedInUser.EmbeddedLoggedInUser = Facade.LoggedInUser;
+                Text = string.Format("Mini Facebook - {0}", Facade.LoggedInUserName);
                 connectionButton.Text = "Log Out";
                 //userLabel.Text = FacebookBasicMethods.LoggedInUserName;
                 fetchUserInfo();
@@ -49,44 +53,43 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void logOutUser()
         {
-            FacebookBasicMethods.LogOutUser();
+            Facade.LogOutUser();
             clearAllData();
             connectionButton.Text = "Log In";
         }
 
         private void fetchUserInfo()
         {
-            userBindingSource.DataSource = ConnectionManager.LoggedInUser;
-            wallPostsBindingSource.DataSource = FacebookBasicMethods.UserWallPosts;
-            friendListBindingSource.DataSource = FacebookBasicMethods.UserFriends;
-            albumsBindingSource.DataSource = FacebookBasicMethods.UserAlbums;
-            //loadUserProfilePicture();
-            addItemsToListBox<Post>(FacebookBasicMethods.UserWallPosts, postsListBox);
-            addItemsToListBox<User>(FacebookBasicMethods.UserFriends, friendsListBox);
-            addItemsToListBox<Event>(FacebookBasicMethods.UserEvents, eventsListBox);
-            addItemsToListBox<Album>(FacebookBasicMethods.UserAlbums, albumsListBox);
-            addItemsToListBox<Group>(FacebookBasicMethods.UserGroups, groupsListBox);
-        }
+            //userNameBindingSource.DataSource = Facade.LoggedInUserName;
+            //userBindingSource.DataSource = Facade.LoggedInUserProfilePicture;
+            //wallPostsBindingSource.DataSource = Facade.LoggedInUserWallPosts;
+            //friendListBindingSource.DataSource = Facade.LoggedInUserFriends;
+            //albumsBindingSource.DataSource = Facade.LoggedInUserAlbums;
+            //groupBindingSource.DataSource = Facade.LoggedInUserGroups;
+            //addItemsToListBox<Post>(Facade.LoggedInUserWallPosts, postsListBox);
+            try
+            {
+                iLoggedInUserBindingSource.DataSource = m_LoggedInUser;
+                eventsBindingSource1.DataSource = m_LoggedInUser.Albums;
+                friendsBindingSource.DataSource = m_LoggedInUser.Friends;
+            }
+            catch(Exception e)
+            {
 
-        private void loadUserProfilePicture()
-        {
-            //profilePictureBox.LoadAsync(FacebookBasicMethods.LoggedInUserProfilePicture);
+            }
+
+
         }
 
         private void clearAllData()
         {
-            //profilePictureBox.CancelAsync();
             clearAllListBoxes();
             clearAllSelectedPostInformation();
         }
 
         private void clearAllListBoxes()
         {
-            clearListBoxDataAndRefresh(friendsListBox);
-            clearListBoxDataAndRefresh(albumsListBox);
-            clearListBoxDataAndRefresh(groupsListBox);
-            clearListBoxDataAndRefresh(eventsListBox);
-            //clearListBoxDataAndRefresh(postsListBox);
+            clearListBoxDataAndRefresh(postsListBox);
         }
 
         private void clearListBoxDataAndRefresh(ListBox i_ListBoxToClear)
@@ -137,7 +140,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
                 if (i_Collection.Count == 0)
                 {
-                    i_ListBoxToUpdate.Items.Add(string.Format("{0} has no {1}", FacebookBasicMethods.LoggedInUserName, typeof(T).Name));
+                    i_ListBoxToUpdate.Items.Add(string.Format("{0} has no {1}", Facade.LoggedInUserName, typeof(T).Name));
                 }
             }
             catch (Exception e)
@@ -340,71 +343,21 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
         }
 
-        private void friendsListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (friendsListBox.SelectedItem is User)
-            {
-                try
-                {
-                    User selectedFriend = friendsListBox.SelectedItem as User;
-                    addItemsToListBox<Post>(selectedFriend.WallPosts, postsListBox);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("There was a problem receiving Friends.");
-                }
-            }
-        }
-
-        private void albumsListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            clearCollectionsItemsTabControlListBoxes();
-
-            if (albumsListBox.SelectedItem is Album)
-            {
-                try
-                {
-                    Album selectedAlbum = albumsListBox.SelectedItem as Album;
-                    addItemsToListBox<Photo>(selectedAlbum.Photos, postsListBox);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("There was a problem receiving Pictures.");
-                }
-            }
-        }
-
-        private void groupsListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (groupsListBox.SelectedItem is Group)
-            {
-                try
-                {
-                    Group selectedGroup = groupsListBox.SelectedItem as Group;
-                    addItemsToListBox<Post>(selectedGroup.WallPosts, postsListBox);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("There was a problem receiving Groups.");
-                }
-            }
-        }
-
-        private void eventsListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (eventsListBox.SelectedItem is Event)
-            {
-                try
-                {
-                    Event selectedEvent = eventsListBox.SelectedItem as Event;
-                    addItemsToListBox<Post>(selectedEvent.WallPosts, postsListBox);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("There was a problem receiving Events.");
-                }
-            }
-        }
+        //private void eventsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    if (eventsListBox.SelectedItem is Event)
+        //    {
+        //        try
+        //        {
+        //            Event selectedEvent = eventsListBox.SelectedItem as Event;
+        //            addItemsToListBox<Post>(selectedEvent.WallPosts, postsListBox);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show("There was a problem receiving Events.");
+        //        }
+        //    }
+        //}
 
         private void myPostsButton_Click(object sender, EventArgs e)
         {
@@ -490,6 +443,78 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             catch (Exception ex)
             {
                 MessageBox.Show("There was a problem Filtering.");
+            }
+        }
+
+        private void friendListListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            clearCollectionsItemsTabControlListBoxes();
+
+            if (friendsListBox.SelectedItem is User)
+            {
+                try
+                {
+                    User selectedFriend = friendsListBox.SelectedItem as User;
+                    addItemsToListBox<Post>(selectedFriend.WallPosts, postsListBox);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There was a problem receiving Friends.");
+                }
+            }
+        }
+
+        private void albumsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            clearCollectionsItemsTabControlListBoxes();
+
+            if (albumsListBox.SelectedItem is Album)
+            {
+                try
+                {
+                    Album selectedAlbum = albumsListBox.SelectedItem as Album;
+                    addItemsToListBox<Photo>(selectedAlbum.Photos, postsListBox);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There was a problem receiving Pictures.");
+                }
+            }
+        }
+
+        private void groupsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            clearCollectionsItemsTabControlListBoxes();
+
+            if (groupsListBox.SelectedItem is Group)
+            {
+                try
+                {
+                    Group selectedGroup = groupsListBox.SelectedItem as Group;
+                    addItemsToListBox<Post>(selectedGroup.WallPosts, postsListBox);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There was a problem receiving Groups.");
+                }
+            }
+        }
+
+        private void eventsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            clearCollectionsItemsTabControlListBoxes();
+
+            if (eventsListBox.SelectedItem is Event)
+            {
+                try
+                {
+                    Event selectedGroup = eventsListBox.SelectedItem as Event;
+                    addItemsToListBox<Post>(selectedGroup.WallPosts, postsListBox);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There was a problem receiving Events.");
+                }
             }
         }
     }

@@ -19,7 +19,10 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         public static User LoggedInUser
         {
-            get { return sm_LoggedInUser; }
+            get
+            {
+                return sm_LoggedInUser;
+            }
         }
 
         public static string LogInUser(string i_AppID)

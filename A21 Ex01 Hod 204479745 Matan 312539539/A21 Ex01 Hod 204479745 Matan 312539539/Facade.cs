@@ -7,10 +7,18 @@ using FacebookWrapper.ObjectModel;
 
 namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
-    public static class FacebookBasicMethods
+    public static class Facade
     {
         public static SelectedPost m_SelectedPost;
+        private static UserToLoggedInUserAdapter m_LoggedInUser;
 
+        public static UserToLoggedInUserAdapter LoggedInUser
+        {
+            get
+            {
+                return m_LoggedInUser;
+            }
+        }
         public static string LoggedInUserName
         {
             get
@@ -32,6 +40,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             string loginError = string.Empty;
 
             loginError = ConnectionManager.LogInUser("3925570110805927");
+            m_LoggedInUser.LoggedInUser = ConnectionManager.LoggedInUser;
 
             return loginError;
         }
@@ -41,7 +50,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             ConnectionManager.LogOutUser();
         }
 
-        public static FacebookObjectCollection<Post> UserWallPosts
+        public static FacebookObjectCollection<Post> LoggedInUserWallPosts
         {
             get
             {
@@ -49,7 +58,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
         }
 
-        public static FacebookObjectCollection<User> UserFriends
+        public static FacebookObjectCollection<User> LoggedInUserFriends
         {
             get
             {
@@ -65,7 +74,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
         }
 
-        public static FacebookObjectCollection<Album> UserAlbums
+        public static FacebookObjectCollection<Album> LoggedInUserAlbums
         {
             get
             {
@@ -73,7 +82,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
         }
 
-        public static FacebookObjectCollection<Group> UserGroups
+        public static FacebookObjectCollection<Group> LoggedInUserGroups
         {
             get
             {
