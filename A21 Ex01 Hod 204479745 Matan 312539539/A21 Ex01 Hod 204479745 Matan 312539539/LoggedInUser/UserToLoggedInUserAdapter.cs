@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
 using FacebookWrapper.ObjectModel;
 
 
@@ -11,6 +8,11 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
     {
         private User m_AdaptedUser;
 
+        public UserToLoggedInUserAdapter(User i_UserToAdapt)
+        {
+            m_AdaptedUser = i_UserToAdapt;
+        }
+
         public string Name
         {
             get
@@ -19,11 +21,19 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
         }
 
-        public string PictureURL
+        public Image Picture
         {
             get
             {
-                return m_AdaptedUser.PictureNormalURL;
+                return m_AdaptedUser.ImageNormal;
+            }
+        }
+
+        public FacebookObjectCollection<Post> WallPosts
+        {
+            get
+            {
+                return m_AdaptedUser.WallPosts;
             }
         }
 
@@ -64,11 +74,6 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             get
             {
                 return m_AdaptedUser;
-            }
-
-            set
-            {
-                m_AdaptedUser = value;
             }
         }
     }

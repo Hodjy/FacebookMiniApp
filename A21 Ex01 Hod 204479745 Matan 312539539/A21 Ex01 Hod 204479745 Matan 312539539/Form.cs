@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 
@@ -11,12 +6,12 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
     public partial class MainFacebookForm : Form
     {
-        LoggedInUser m_LoggedInUser;
+        ILoggedInUser m_LoggedInUser;
+        ISelectedItem m_SelectedItem;
 
         public MainFacebookForm()
         {
             InitializeComponent();
-            fetchUserInfo();
         }
 
         private void Form_Load(object sender, EventArgs e)
@@ -37,17 +32,21 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                 MessageBox.Show("Could not log in to the facebook server.");
             }
 
+            InitiateFormInfo(loginError);
+            fetchUserInfo();
+        }
+
+        private void InitiateFormInfo(string loginError)
+        {
             if (!string.IsNullOrEmpty(loginError))
             {
                 MessageBox.Show(loginError);
             }
             else
             {
-                m_LoggedInUser.EmbeddedLoggedInUser = Facade.LoggedInUser;
-                Text = string.Format("Mini Facebook - {0}", Facade.LoggedInUserName);
+                m_LoggedInUser = Facade.LoggedInUser;
+                Text = string.Format("Mini Facebook - {0}", m_LoggedInUser.Name);
                 connectionButton.Text = "Log Out";
-                //userLabel.Text = FacebookBasicMethods.LoggedInUserName;
-                fetchUserInfo();
             }
         }
 
@@ -60,25 +59,19 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void fetchUserInfo()
         {
-            //userNameBindingSource.DataSource = Facade.LoggedInUserName;
-            //userBindingSource.DataSource = Facade.LoggedInUserProfilePicture;
-            //wallPostsBindingSource.DataSource = Facade.LoggedInUserWallPosts;
-            //friendListBindingSource.DataSource = Facade.LoggedInUserFriends;
-            //albumsBindingSource.DataSource = Facade.LoggedInUserAlbums;
-            //groupBindingSource.DataSource = Facade.LoggedInUserGroups;
-            //addItemsToListBox<Post>(Facade.LoggedInUserWallPosts, postsListBox);
             try
             {
-                iLoggedInUserBindingSource.DataSource = m_LoggedInUser;
-                eventsBindingSource1.DataSource = m_LoggedInUser.Albums;
+                ILoggedInUserBindingSource.DataSource = m_LoggedInUser;
                 friendsBindingSource.DataSource = m_LoggedInUser.Friends;
+                albumsBindingSource.DataSource = m_LoggedInUser.Albums;
+                groupsBindingSource.DataSource = m_LoggedInUser.Groups;
+                eventsBindingSource.DataSource = m_LoggedInUser.Events;
+                addItemsToListBox<Post>(m_LoggedInUser.WallPosts, postsListBox);
             }
             catch(Exception e)
             {
-
+                MessageBox.Show("Could not fetch user info");
             }
-
-
         }
 
         private void clearAllData()
@@ -152,7 +145,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void addItemToSelected(Post i_PostToGet = null, Photo i_PhotoToGet = null)
         {
-            SelectedPost Post = new SelectedPost();
+            SelectedPostSecond Post = new SelectedPostSecond();
             if (i_PostToGet != null)
             {
                 Post.ChangeSelectedItem(i_PostToGet, i_PostToGet.PictureURL, i_PostToGet.Message);
@@ -258,11 +251,12 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         }
 
-        private void updateLikeButtonName(SelectedPost i_SelectedItem)
+        // incomplete
+        private void updateLikeButtonName()
         {
             try
             {
-                if (i_SelectedItem.IsLikedByUser(ConnectionManager.LoggedInUser))
+                if () // TODO: method either in facade or one of the interfaces.
                 {
                     likeButton.Text = "Dislike";
                 }
@@ -373,12 +367,12 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void postsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            updateListBox(postsListBox);
+            m_SelectedItem = Facade.GetSelectedItemType((PostedItem)postsListBox.SelectedItem);
         }
 
         private void likeButton_Click(object sender, EventArgs e)
         {
-            SelectedPost selectedPost = postsListBox.SelectedItem as SelectedPost;
+            SelectedPostSecond selectedPost = postsListBox.SelectedItem as SelectedPostSecond;
 
             try
             {

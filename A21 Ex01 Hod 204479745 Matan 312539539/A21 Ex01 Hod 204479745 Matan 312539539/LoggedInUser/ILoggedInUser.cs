@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
 using FacebookWrapper.ObjectModel;
 
 namespace A21_Ex01_Hod_204479745_Matan_312539539
@@ -13,7 +10,12 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             get;
         }
 
-        string PictureURL
+        Image Picture
+        {
+            get;
+        }
+
+        FacebookObjectCollection<Post> WallPosts
         {
             get;
         }

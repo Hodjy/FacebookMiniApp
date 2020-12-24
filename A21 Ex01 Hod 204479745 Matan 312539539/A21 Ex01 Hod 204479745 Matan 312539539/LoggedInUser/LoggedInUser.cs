@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
 using FacebookWrapper.ObjectModel;
 
 
@@ -11,6 +8,10 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
     {
         private UserToLoggedInUserAdapter m_LoggedInUser;
 
+        public LoggedInUser()
+        {
+        }
+
         public string Name
         {
             get
@@ -19,11 +20,19 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
         }
 
-        public string PictureURL
+        public Image Picture
         {
             get
             {
-                return m_LoggedInUser.PictureURL;
+                return m_LoggedInUser.Picture;
+            }
+        }
+
+        public FacebookObjectCollection<Post> WallPosts
+        {
+            get
+            {
+                return m_LoggedInUser.WallPosts;
             }
         }
 
