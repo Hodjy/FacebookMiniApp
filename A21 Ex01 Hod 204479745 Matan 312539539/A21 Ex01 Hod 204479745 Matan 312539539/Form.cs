@@ -42,7 +42,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             {
                 Text = string.Format("Mini Facebook - {0}", FacebookBasicMethods.LoggedInUserName);
                 connectionButton.Text = "Log Out";
-                userLabel.Text = FacebookBasicMethods.LoggedInUserName;
+                //userLabel.Text = FacebookBasicMethods.LoggedInUserName;
                 fetchUserInfo();
             }
         }
@@ -56,7 +56,11 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void fetchUserInfo()
         {
-            loadUserProfilePicture();
+            userBindingSource.DataSource = ConnectionManager.LoggedInUser;
+            wallPostsBindingSource.DataSource = FacebookBasicMethods.UserWallPosts;
+            friendListBindingSource.DataSource = FacebookBasicMethods.UserFriends;
+            albumsBindingSource.DataSource = FacebookBasicMethods.UserAlbums;
+            //loadUserProfilePicture();
             addItemsToListBox<Post>(FacebookBasicMethods.UserWallPosts, postsListBox);
             addItemsToListBox<User>(FacebookBasicMethods.UserFriends, friendsListBox);
             addItemsToListBox<Event>(FacebookBasicMethods.UserEvents, eventsListBox);
@@ -66,12 +70,12 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void loadUserProfilePicture()
         {
-            profilePictureBox.LoadAsync(FacebookBasicMethods.LoggedInUserProfilePicture);
+            //profilePictureBox.LoadAsync(FacebookBasicMethods.LoggedInUserProfilePicture);
         }
 
         private void clearAllData()
         {
-            profilePictureBox.CancelAsync();
+            //profilePictureBox.CancelAsync();
             clearAllListBoxes();
             clearAllSelectedPostInformation();
         }
