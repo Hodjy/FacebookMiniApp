@@ -35,6 +35,15 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
         }
 
+        public bool isLikedByUser(User i_UserToCheck)
+        {
+            bool isLiked = false;
+
+            isLiked = m_SelectedPost.LikedBy.Contains(i_UserToCheck);
+
+            return isLiked;
+        }
+
         public int CommentsCount
         {
             get

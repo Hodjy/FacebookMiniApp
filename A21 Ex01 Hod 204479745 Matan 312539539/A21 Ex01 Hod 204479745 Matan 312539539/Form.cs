@@ -256,7 +256,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             try
             {
-                if () // TODO: method either in facade or one of the interfaces.
+                if (Facade.isPostLikedByUser(m_SelectedItem)) // TODO: method either in facade or one of the interfaces.
                 {
                     likeButton.Text = "Dislike";
                 }

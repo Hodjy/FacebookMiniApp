@@ -47,6 +47,15 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             return selectedItemToReturn;
         }
 
+        public static bool isPostLikedByUser(ISelectedItem i_PostToCheck)
+        {
+            bool isLiked = false;
+
+            isLiked = i_PostToCheck.isLikedByUser(ConnectionManager.LoggedInUser);
+
+            return isLiked;
+        }
+
         // will be replaceed with proxy
         public static string LoggedInUserProfilePicture
         {
