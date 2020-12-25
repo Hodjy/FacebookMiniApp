@@ -1,4 +1,5 @@
-﻿using FacebookWrapper.ObjectModel;
+﻿using System;
+using FacebookWrapper.ObjectModel;
 
 namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
@@ -15,11 +16,11 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             get
             {
-                return m_SelectedPhoto.Message;
+                return m_SelectedPhoto.Message;   
             }
         }
 
-        public string Picture
+        public string PictureURL
         {
             get
             {

@@ -21,7 +21,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             string loginError = string.Empty;
 
             loginError = ConnectionManager.LogInUser(sr_AppID);
-            m_LoggedInUser.EmbeddedLoggedInUser = new UserToLoggedInUserAdapter(ConnectionManager.LoggedInUser);
+            m_LoggedInUser.User = new UserToLoggedInUserAdapter(ConnectionManager.LoggedInUser);
 
             return loginError;
         }
@@ -31,7 +31,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             ConnectionManager.LogOutUser();
         }
 
-        public static ISelectedItem GetSelectedItemType(PostedItem m_PostedItem)
+        public static ISelectedItem ConvertItemToSelectedItem(PostedItem m_PostedItem)
         {
             ISelectedItem selectedItemToReturn = null;
 
@@ -47,7 +47,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             return selectedItemToReturn;
         }
 
-        public static bool isPostLikedByUser(ISelectedItem i_PostToCheck)
+        public static bool isSelectedItemLikedByUser(ISelectedItem i_PostToCheck)
         {
             bool isLiked = false;
 
@@ -56,67 +56,5 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             return isLiked;
         }
 
-        // will be replaceed with proxy
-        public static string LoggedInUserProfilePicture
-        {
-            get
-            {
-                return ConnectionManager.LoggedInUser.PictureNormalURL;
-            }
-        }
-
-        // will be replaceed with proxy
-        public static string LoggedInUserName
-        {
-            get
-            {
-                return ConnectionManager.LoggedInUser.Name;
-            }
-        }
-
-        // will be replaced with proxy
-        public static FacebookObjectCollection<Post> LoggedInUserWallPosts
-        {
-            get
-            {
-                return ConnectionManager.LoggedInUser.WallPosts;
-            }
-        }
-
-        // will be replaced with proxy
-        public static FacebookObjectCollection<User> LoggedInUserFriends
-        {
-            get
-            {
-                return ConnectionManager.LoggedInUser.Friends;
-            }
-        }
-        
-        // will be replaced with proxy
-        public static FacebookObjectCollection<Event> UserEvents
-        {
-            get
-            {
-                return ConnectionManager.LoggedInUser.Events;
-            }
-        }
-
-        // will be replaced with proxy
-        public static FacebookObjectCollection<Album> LoggedInUserAlbums
-        {
-            get
-            {
-                return ConnectionManager.LoggedInUser.Albums;
-            }
-        }
-
-        // will be replaced with proxy
-        public static FacebookObjectCollection<Group> LoggedInUserGroups
-        {
-            get
-            {
-                return ConnectionManager.LoggedInUser.Groups;
-            }
-        }
     }
 }

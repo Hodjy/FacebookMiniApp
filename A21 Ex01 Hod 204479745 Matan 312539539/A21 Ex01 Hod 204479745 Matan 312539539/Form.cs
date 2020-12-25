@@ -15,8 +15,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         }
 
         private void Form_Load(object sender, EventArgs e)
-        {
-            
+        {           
         }
 
         private void logInUser()
@@ -62,11 +61,8 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             try
             {
                 ILoggedInUserBindingSource.DataSource = m_LoggedInUser;
-                friendsBindingSource.DataSource = m_LoggedInUser.Friends;
-                albumsBindingSource.DataSource = m_LoggedInUser.Albums;
-                groupsBindingSource.DataSource = m_LoggedInUser.Groups;
-                eventsBindingSource.DataSource = m_LoggedInUser.Events;
                 addItemsToListBox<Post>(m_LoggedInUser.WallPosts, postsListBox);
+                iSelectedItemBindingSource.DataSource = postsListBox.Items;
             }
             catch(Exception e)
             {
@@ -133,7 +129,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
                 if (i_Collection.Count == 0)
                 {
-                    i_ListBoxToUpdate.Items.Add(string.Format("{0} has no {1}", Facade.LoggedInUserName, typeof(T).Name));
+                    i_ListBoxToUpdate.Items.Add(string.Format("{0} has no {1}", m_LoggedInUser.Name, typeof(T).Name));
                 }
             }
             catch (Exception e)
@@ -256,7 +252,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             try
             {
-                if (Facade.isPostLikedByUser(m_SelectedItem)) // TODO: method either in facade or one of the interfaces.
+                if (Facade.isSelectedItemLikedByUser(m_SelectedItem)) // TODO: method either in facade or one of the interfaces.
                 {
                     likeButton.Text = "Dislike";
                 }
@@ -367,7 +363,16 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void postsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            m_SelectedItem = Facade.GetSelectedItemType((PostedItem)postsListBox.SelectedItem);
+            updateListBox(postsListBox);
+            try
+            {
+                m_SelectedItem = Facade.ConvertItemToSelectedItem((PostedItem)postsListBox.SelectedItem);
+                iSelectedItemBindingSource.DataSource = m_SelectedItem;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A problem occured while trying to display the post.");
+            }
         }
 
         private void likeButton_Click(object sender, EventArgs e)
@@ -471,7 +476,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("There was a problem receiving Pictures.");
+                    MessageBox.Show("There was a problem receiving Albums.");
                 }
             }
         }
