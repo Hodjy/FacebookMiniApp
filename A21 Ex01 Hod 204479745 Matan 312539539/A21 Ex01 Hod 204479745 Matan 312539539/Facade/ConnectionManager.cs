@@ -81,13 +81,5 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             sm_LoginResult = null;
         }
-
-        public static string GetProfilePic()
-        {
-            string pictureURL = sm_LoggedInUser.PictureNormalURL;
-            Console.WriteLine(pictureURL);
-
-            return pictureURL;
-        }
     }
 }

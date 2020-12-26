@@ -1,10 +1,10 @@
-﻿using FacebookWrapper.ObjectModel;
+﻿using System;
+using FacebookWrapper.ObjectModel;
 
 namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
     public static class Facade // Maybe change to non-static class
     {
-        public static SelectedPostSecond m_SelectedPost;
         private static LoggedInUser m_LoggedInUser = new LoggedInUser();
         private static readonly string sr_AppID = "3925570110805927";
 
@@ -56,5 +56,22 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             return isLiked;
         }
 
+        public static FacebookObjectCollection<Post> FilterPostsByDate(FacebookObjectCollection<Post> i_PostsToFilter, DateTime i_DateToFilterBy)
+        {
+            FacebookObjectCollection<Post> filteredPosts;
+
+            filteredPosts = FacebookFilters.FilterPostsByDate(i_PostsToFilter, i_DateToFilterBy);
+
+            return filteredPosts;
+        }
+
+        public static FacebookObjectCollection<Post> FilterPostsByLikesCount(FacebookObjectCollection<Post> i_PostsToFilter, int i_MinLikesCount)
+        {
+            FacebookObjectCollection<Post> filteredPosts;
+
+            filteredPosts = FacebookFilters.FilterPostsByLikesCount(i_PostsToFilter, i_MinLikesCount);
+
+            return filteredPosts;
+        }
     }
 }
