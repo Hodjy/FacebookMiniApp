@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Collections;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
@@ -9,6 +10,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
     {
         ILoggedInUser m_LoggedInUser;
         ISelectedItem m_SelectedItem;
+        private static readonly object sr_ListboxAddLock = new object();
 
         public MainFacebookForm()
         {
@@ -33,7 +35,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
 
             InitiateFormInfo(loginError);
-            fetchUserInfo();
+            new Thread(fetchUserInfo).Start();
         }
 
         private void InitiateFormInfo(string loginError)
@@ -59,15 +61,31 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void fetchUserInfo()
         {
+                new Thread(bindLoggedInUser).Start();
+                new Thread(() => addItemsToPostListBox<Post>(m_LoggedInUser.WallPosts)).Start();
+        }
+
+        private void bindLoggedInUser()
+        {
             try
             {
                 ILoggedInUserBindingSource.DataSource = m_LoggedInUser;
-                addItemsToListBox<Post>(m_LoggedInUser.WallPosts, postsListBox);
-                iSelectedItemBindingSource.DataSource = postsListBox.Items;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Could not fetch user info");
+            }
+        }
+
+        private void bindSelectedItem()
+        {
+            try
+            {
+                iSelectedItemBindingSource.DataSource = m_SelectedItem;
             }
             catch(Exception e)
             {
-                MessageBox.Show("Could not fetch user info");
+                MessageBox.Show("Could not show the post.");
             }
         }
 
@@ -90,28 +108,31 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void clearCollectionsItemsTabControlListBoxes()
         {
-            postsListBox.Items.Clear();
+            postsListBox.Invoke(new Action(() => postsListBox.Items.Clear()));
         }  
 
-        private void addItemsToListBox<T>(FacebookObjectCollection<T> i_Collection, ListBox i_ListBoxToUpdate)
+        private void addItemsToPostListBox<T>(FacebookObjectCollection<T> i_Collection)
         {
-            try
+            lock(sr_ListboxAddLock)
             {
-                foreach (T evnt in i_Collection)
+                try
                 {
-                    i_ListBoxToUpdate.Items.Add(evnt);
-                }
+                    foreach (T evnt in i_Collection)
+                    {
+                        postsListBox.Invoke(new Action(() => postsListBox.Items.Add(evnt)));
+                    }
 
-                if (i_Collection.Count == 0)
+                    if (i_Collection.Count == 0)
+                    {
+                        postsListBox.Invoke(new Action(() =>
+                            postsListBox.Items.Add(string.Format("{0} has no {1}", m_LoggedInUser.Name, typeof(T).Name))));
+                    }
+                }
+                catch (Exception e)
                 {
-                    i_ListBoxToUpdate.Items.Add(string.Format("{0} has no {1}", m_LoggedInUser.Name, typeof(T).Name));
+                    MessageBox.Show(string.Format("There was a problem fetching {0}", typeof(T).Name));
                 }
             }
-            catch (Exception e)
-            {
-                MessageBox.Show(string.Format("There was a problem fetching {0}", typeof(T).Name));
-            }
-
         }
 
         private void updateLikeButtonName()
@@ -145,7 +166,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
             clearCollectionsItemsTabControlListBoxes();
             filteredPosts = Facade.FilterPostsByDate(i_PostsToFilter, i_SelectedDate);
-            addItemsToListBox<Post>(filteredPosts, postsListBox);
+            addItemsToPostListBox<Post>(filteredPosts);
         }
         
         private void updateListBoxByLikes(FacebookObjectCollection<Post> i_PostsToFilter, int i_MinLikesCount)
@@ -154,7 +175,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
             clearCollectionsItemsTabControlListBoxes();
             filteredPosts = Facade.FilterPostsByLikesCount(i_PostsToFilter, i_MinLikesCount);
-            addItemsToListBox<Post>(filteredPosts, postsListBox);
+            addItemsToPostListBox<Post>(filteredPosts);
 
         }
 
@@ -163,7 +184,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         private void connectionButton_Click(object sender, EventArgs e)
         {
 
-            if (ConnectionManager.LoginResult == null)
+            if (!Facade.IsUserLoggedIn)
             {
                 logInUser();
             }
@@ -177,7 +198,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             try
             {
-                addItemsToListBox<Post>(m_LoggedInUser.WallPosts, postsListBox);
+                new Thread (() => addItemsToPostListBox<Post>(m_LoggedInUser.WallPosts)).Start();
             }
             catch (Exception ex)
             {
@@ -190,7 +211,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             try
             {
                 m_SelectedItem = Facade.ConvertItemToSelectedItem((PostedItem)postsListBox.SelectedItem);
-                iSelectedItemBindingSource.DataSource = m_SelectedItem;
+                new Thread(bindSelectedItem).Start();
             }
             catch (Exception ex)
             {
@@ -271,7 +292,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                 try
                 {
                     User selectedFriend = friendsListBox.SelectedItem as User;
-                    addItemsToListBox<Post>(selectedFriend.WallPosts, postsListBox);
+                    new Thread(() => addItemsToPostListBox<Post>(selectedFriend.WallPosts)).Start();
                 }
                 catch (Exception ex)
                 {
@@ -289,7 +310,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                 try
                 {
                     Album selectedAlbum = albumsListBox.SelectedItem as Album;
-                    addItemsToListBox<Photo>(selectedAlbum.Photos, postsListBox);
+                    new Thread(() => addItemsToPostListBox<Photo>(selectedAlbum.Photos)).Start();
                 }
                 catch (Exception ex)
                 {
@@ -307,7 +328,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                 try
                 {
                     Group selectedGroup = groupsListBox.SelectedItem as Group;
-                    addItemsToListBox<Post>(selectedGroup.WallPosts, postsListBox);
+                    new Thread(() => addItemsToPostListBox<Post>(selectedGroup.WallPosts)).Start();
                 }
                 catch (Exception ex)
                 {
@@ -325,7 +346,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                 try
                 {
                     Event selectedGroup = eventsListBox.SelectedItem as Event;
-                    addItemsToListBox<Post>(selectedGroup.WallPosts, postsListBox);
+                    new Thread(() => addItemsToPostListBox<Post>(selectedGroup.WallPosts)).Start();
                 }
                 catch (Exception ex)
                 {

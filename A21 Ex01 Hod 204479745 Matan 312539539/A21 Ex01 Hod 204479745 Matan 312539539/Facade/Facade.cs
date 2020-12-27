@@ -7,6 +7,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
     {
         private static LoggedInUser m_LoggedInUser = new LoggedInUser();
         private static readonly string sr_AppID = "3925570110805927";
+        private static bool sm_IsUserLoggedIn = false;
 
         public static LoggedInUser LoggedInUser
         {
@@ -23,12 +24,26 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             loginError = ConnectionManager.LogInUser(sr_AppID);
             m_LoggedInUser.User = new UserToLoggedInUserAdapter(ConnectionManager.LoggedInUser);
 
+            if(loginError == string.Empty)
+            {
+                sm_IsUserLoggedIn = true;
+            }
+
             return loginError;
         }
 
         public static void LogOutUser()
         {
             ConnectionManager.LogOutUser();
+            sm_IsUserLoggedIn = false;
+        }
+
+        public static bool IsUserLoggedIn
+        {
+            get
+            {
+                return sm_IsUserLoggedIn;
+            }
         }
 
         public static ISelectedItem ConvertItemToSelectedItem(PostedItem m_PostedItem)
