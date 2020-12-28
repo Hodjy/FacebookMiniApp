@@ -103,11 +103,12 @@
             // picturePictureBox
             // 
             this.picturePictureBox.BackColor = System.Drawing.Color.SteelBlue;
-            this.picturePictureBox.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.ILoggedInUserBindingSource, "Picture", true));
+            this.picturePictureBox.DataBindings.Add(new System.Windows.Forms.Binding("ImageLocation", this.ILoggedInUserBindingSource, "PictureURL", true));
             this.picturePictureBox.Location = new System.Drawing.Point(7, 10);
             this.picturePictureBox.Margin = new System.Windows.Forms.Padding(2);
             this.picturePictureBox.Name = "picturePictureBox";
             this.picturePictureBox.Size = new System.Drawing.Size(99, 98);
+            this.picturePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picturePictureBox.TabIndex = 27;
             this.picturePictureBox.TabStop = false;
             // 
@@ -172,6 +173,7 @@
             this.friendsListBox.Size = new System.Drawing.Size(205, 238);
             this.friendsListBox.TabIndex = 16;
             this.friendsListBox.ValueMember = "About";
+            this.friendsListBox.SelectedIndexChanged += new System.EventHandler(this.friendListListBox_SelectedIndexChanged);
             // 
             // friendsBindingSource
             // 

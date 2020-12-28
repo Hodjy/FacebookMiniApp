@@ -1,30 +1,30 @@
-﻿using System.Drawing;
-using FacebookWrapper.ObjectModel;
+﻿using FacebookWrapper.ObjectModel;
 
 
 namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
-    public class LoggedInUser : ILoggedInUser
+    internal class UserToLoggedInUserAdapter : ILoggedInUser
     {
-        private UserToLoggedInUserAdapter m_LoggedInUser;
+        private User m_AdaptedUser;
 
-        public LoggedInUser()
+        public UserToLoggedInUserAdapter(User i_UserToAdapt)
         {
+            m_AdaptedUser = i_UserToAdapt;
         }
 
         public string Name
         {
             get
             {
-                return m_LoggedInUser.Name;
+                return m_AdaptedUser.Name;
             }
         }
 
-        public Image Picture
+        public string PictureURL
         {
             get
             {
-                return m_LoggedInUser.Picture;
+                return m_AdaptedUser.PictureNormalURL;
             }
         }
 
@@ -32,7 +32,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             get
             {
-                return m_LoggedInUser.WallPosts;
+                return m_AdaptedUser.WallPosts;
             }
         }
 
@@ -40,7 +40,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             get
             {
-                return m_LoggedInUser.Friends;
+                return m_AdaptedUser.Friends;
             }
         }
 
@@ -48,7 +48,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             get
             {
-                return m_LoggedInUser.Events;
+                return m_AdaptedUser.Events;
             }
         }
 
@@ -56,7 +56,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             get
             {
-                return m_LoggedInUser.Groups;
+                return m_AdaptedUser.Groups;
             }
         }
 
@@ -64,15 +64,15 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             get
             {
-                return m_LoggedInUser.Albums;
+                return m_AdaptedUser.Albums;
             }
         }
 
-        public UserToLoggedInUserAdapter User
+        public User LoggedInUser
         {
-            set
+            get
             {
-                m_LoggedInUser = value;
+                return m_AdaptedUser;
             }
         }
     }

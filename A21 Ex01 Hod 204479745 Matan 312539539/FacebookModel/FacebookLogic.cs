@@ -3,7 +3,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
-    public static class Facade // Maybe change to non-static class
+    public static class FacebookLogic // Maybe change to non-static class
     {
         private static LoggedInUser m_LoggedInUser = new LoggedInUser();
         private static readonly string sr_AppID = "3925570110805927";
@@ -62,7 +62,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             return selectedItemToReturn;
         }
 
-        public static bool isSelectedItemLikedByUser(ISelectedItem i_PostToCheck)
+        public static bool IsSelectedItemLikedByUser(ISelectedItem i_PostToCheck)
         {
             bool isLiked = false;
 

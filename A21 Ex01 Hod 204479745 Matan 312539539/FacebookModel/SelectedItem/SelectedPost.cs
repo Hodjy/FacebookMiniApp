@@ -1,22 +1,21 @@
-﻿using System;
-using FacebookWrapper.ObjectModel;
+﻿using FacebookWrapper.ObjectModel;
 
 namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
-    public class SelectedPhoto : ISelectedItem
+    internal class SelectedPost : ISelectedItem
     {
-        Photo m_SelectedPhoto;
+        private Post m_SelectedPost;
 
-        public SelectedPhoto(Photo i_SelectedPhoto)
+        public SelectedPost(Post i_SelectedPost)
         {
-            m_SelectedPhoto = i_SelectedPhoto;
+            m_SelectedPost = i_SelectedPost;
         }
 
         public string Message
         {
             get
             {
-                return m_SelectedPhoto.Message;   
+                return m_SelectedPost.Message;
             }
         }
 
@@ -24,7 +23,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             get
             {
-                return m_SelectedPhoto.PictureNormalURL;
+                return m_SelectedPost.PictureURL;
             }
         }
 
@@ -32,7 +31,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             get
             {
-                return m_SelectedPhoto.Comments;
+                return m_SelectedPost.Comments;
             }
         }
 
@@ -40,7 +39,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             bool isLiked = false;
 
-            isLiked = m_SelectedPhoto.LikedBy.Contains(i_UserToCheck);
+            isLiked = m_SelectedPost.LikedBy.Contains(i_UserToCheck);
 
             return isLiked;
         }
@@ -49,7 +48,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             get
             {
-                return m_SelectedPhoto.Comments.Count;
+                return m_SelectedPost.Comments.Count;
             }
         }
 
@@ -57,23 +56,23 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             get
             {
-                return m_SelectedPhoto.LikedBy.Count;
+                return m_SelectedPost.LikedBy.Count;
             }
         }
 
         public void CommentOnPost(string i_TextToComment)
         {
-            m_SelectedPhoto.Comment(i_TextToComment);
+            m_SelectedPost.Comment(i_TextToComment);
         }
 
         public void LikePost()
         {
-            m_SelectedPhoto.Like();
+            m_SelectedPost.Like();
         }
 
         public void DislikePost()
         {
-            m_SelectedPhoto.Unlike();
+            m_SelectedPost.Unlike();
         }
     }
 }

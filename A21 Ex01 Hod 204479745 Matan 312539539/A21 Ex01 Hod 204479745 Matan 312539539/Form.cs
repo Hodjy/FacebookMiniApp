@@ -27,7 +27,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
             try
             {
-                loginError = Facade.LogInUser();
+                loginError = FacebookLogic.LogInUser();
             }
             catch (Exception e)
             {
@@ -46,7 +46,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
             else
             {
-                m_LoggedInUser = Facade.LoggedInUser;
+                m_LoggedInUser = FacebookLogic.LoggedInUser;
                 Text = string.Format("Mini Facebook - {0}", m_LoggedInUser.Name);
                 connectionButton.Text = "Log Out";
             }
@@ -54,7 +54,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void logOutUser()
         {
-            Facade.LogOutUser();
+            FacebookLogic.LogOutUser();
             clearAllData();
             connectionButton.Text = "Log In";
         }
@@ -125,7 +125,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                     if (i_Collection.Count == 0)
                     {
                         postsListBox.Invoke(new Action(() =>
-                            postsListBox.Items.Add(string.Format("{0} has no {1}", m_LoggedInUser.Name, typeof(T).Name))));
+                            postsListBox.Items.Add(string.Format("There are no {0}",typeof(T).Name))));
                     }
                 }
                 catch (Exception e)
@@ -139,7 +139,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             try
             {
-                if (Facade.isSelectedItemLikedByUser(m_SelectedItem))
+                if (FacebookLogic.IsSelectedItemLikedByUser(m_SelectedItem))
                 {
                     likeButton.Text = "Dislike";
                 }
@@ -165,7 +165,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             FacebookObjectCollection<Post> filteredPosts;
 
             clearCollectionsItemsTabControlListBoxes();
-            filteredPosts = Facade.FilterPostsByDate(i_PostsToFilter, i_SelectedDate);
+            filteredPosts = FacebookLogic.FilterPostsByDate(i_PostsToFilter, i_SelectedDate);
             addItemsToPostListBox<Post>(filteredPosts);
         }
         
@@ -174,7 +174,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             FacebookObjectCollection<Post> filteredPosts;
 
             clearCollectionsItemsTabControlListBoxes();
-            filteredPosts = Facade.FilterPostsByLikesCount(i_PostsToFilter, i_MinLikesCount);
+            filteredPosts = FacebookLogic.FilterPostsByLikesCount(i_PostsToFilter, i_MinLikesCount);
             addItemsToPostListBox<Post>(filteredPosts);
 
         }
@@ -184,7 +184,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         private void connectionButton_Click(object sender, EventArgs e)
         {
 
-            if (!Facade.IsUserLoggedIn)
+            if (!FacebookLogic.IsUserLoggedIn)
             {
                 logInUser();
             }
@@ -196,13 +196,16 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void myPostsButton_Click(object sender, EventArgs e)
         {
-            try
+            if(FacebookLogic.IsUserLoggedIn)
             {
-                new Thread (() => addItemsToPostListBox<Post>(m_LoggedInUser.WallPosts)).Start();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("There was a problem receiving Posts.");
+                try
+                {
+                    new Thread (() => addItemsToPostListBox<Post>(m_LoggedInUser.WallPosts)).Start();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There was a problem receiving Posts.");
+                }
             }
         }
 
@@ -210,7 +213,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             try
             {
-                m_SelectedItem = Facade.ConvertItemToSelectedItem((PostedItem)postsListBox.SelectedItem);
+                m_SelectedItem = FacebookLogic.ConvertItemToSelectedItem((PostedItem)postsListBox.SelectedItem);
                 new Thread(bindSelectedItem).Start();
             }
             catch (Exception ex)
@@ -225,7 +228,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             {
                 if (m_SelectedItem != null)
                 {
-                    if (Facade.isSelectedItemLikedByUser(m_SelectedItem))
+                    if (FacebookLogic.IsSelectedItemLikedByUser(m_SelectedItem))
                     {
                         m_SelectedItem.DislikePost();
                     }
