@@ -35,9 +35,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Facade\ConnectionManager.cs" />
+    <Compile Include="Library\ConnectionManager.cs" />
     <Compile Include="FacebookLogic.cs" />
-    <Compile Include="Facade\FacebookFilters.cs" />
+    <Compile Include="Library\FacebookFilters.cs" />
     <Compile Include="LoggedInUser\ILoggedInUser.cs" />
     <Compile Include="LoggedInUser\LoggedInUser.cs" />
     <Compile Include="LoggedInUser\UserToLoggedInUserAdapter.cs" />

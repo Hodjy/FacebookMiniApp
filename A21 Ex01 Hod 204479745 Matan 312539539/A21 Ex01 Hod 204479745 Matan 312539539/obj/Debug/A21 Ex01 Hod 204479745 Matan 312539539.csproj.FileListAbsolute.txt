@@ -31,3 +31,5 @@ X:\Hod\College\Third Year\First Semester\Design Patterns\FacebookApp\FacebookMin
 D:\Program Files (x86)\GitHub\FacebookMiniApp\A21 Ex01 Hod 204479745 Matan 312539539\A21 Ex01 Hod 204479745 Matan 312539539\obj\Debug\A21_Ex01_Hod_204479745_Matan_312539539.MainFacebookForm.resources
 X:\Hod\College\Third Year\First Semester\Design Patterns\FacebookApp\FacebookMiniApp\A21 Ex01 Hod 204479745 Matan 312539539\A21 Ex01 Hod 204479745 Matan 312539539\bin\Debug\FacebookModel.dll
 X:\Hod\College\Third Year\First Semester\Design Patterns\FacebookApp\FacebookMiniApp\A21 Ex01 Hod 204479745 Matan 312539539\A21 Ex01 Hod 204479745 Matan 312539539\bin\Debug\FacebookModel.pdb
+X:\Hod\College\Third Year\First Semester\Design Patterns\FacebookApp\FacebookMiniApp\A21 Ex01 Hod 204479745 Matan 312539539\A21 Ex01 Hod 204479745 Matan 312539539\bin\Debug\Facebook.dll
+X:\Hod\College\Third Year\First Semester\Design Patterns\FacebookApp\FacebookMiniApp\A21 Ex01 Hod 204479745 Matan 312539539\A21 Ex01 Hod 204479745 Matan 312539539\bin\Debug\FbGraphApiWrapper.dll

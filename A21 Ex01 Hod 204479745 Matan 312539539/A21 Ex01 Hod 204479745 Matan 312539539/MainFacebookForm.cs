@@ -8,8 +8,8 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
     public partial class MainFacebookForm : Form
     {
-        ILoggedInUser m_LoggedInUser;
-        ISelectedItem m_SelectedItem;
+        private ILoggedInUser m_LoggedInUser;
+        private ISelectedItem m_SelectedItem;
         private static readonly object sr_ListboxAddLock = new object();
 
         public MainFacebookForm()
@@ -117,9 +117,9 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             {
                 try
                 {
-                    foreach (T evnt in i_Collection)
+                    foreach (T item in i_Collection)
                     {
-                        postsListBox.Invoke(new Action(() => postsListBox.Items.Add(evnt)));
+                        postsListBox.Invoke(new Action(() => postsListBox.Items.Add(item)));
                     }
 
                     if (i_Collection.Count == 0)
