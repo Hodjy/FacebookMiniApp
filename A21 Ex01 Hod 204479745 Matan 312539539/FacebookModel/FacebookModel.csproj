@@ -40,7 +40,7 @@
     <Compile Include="Library\FacebookFilters.cs" />
     <Compile Include="LoggedInUser\ILoggedInUser.cs" />
     <Compile Include="LoggedInUser\LoggedInUser.cs" />
-    <Compile Include="LoggedInUser\UserToLoggedInUserAdapter.cs" />
+    <Compile Include="LoggedInUser\UserToLoggedInUser.cs" />
     <Compile Include="SelectedItem\ISelectedItem.cs" />
     <Compile Include="SelectedItem\SelectedPhoto.cs" />
     <Compile Include="SelectedItem\SelectedPost.cs" />

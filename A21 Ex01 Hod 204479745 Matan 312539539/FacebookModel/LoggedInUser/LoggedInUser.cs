@@ -5,7 +5,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
     public class LoggedInUser : ILoggedInUser
     {
-        private UserToLoggedInUserAdapter m_LoggedInUser;
+        private UserToLoggedInUser m_LoggedInUser;
         private readonly string rm_DefaultName = "Application User";
         private readonly string rm_DefaultPictureURL = "https://i.4cdn.org/v/1609174013137.png";
 
@@ -118,7 +118,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             }
         }
 
-        internal UserToLoggedInUserAdapter User
+        internal UserToLoggedInUser User
         {
             set
             {

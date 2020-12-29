@@ -22,7 +22,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             string loginError = string.Empty;
 
             loginError = ConnectionManager.LogInUser(sr_AppID);
-            sm_LoggedInUser.User = new UserToLoggedInUserAdapter(ConnectionManager.LoggedInUser);
+            sm_LoggedInUser.User = new UserToLoggedInUser(ConnectionManager.LoggedInUser);
 
             if(loginError == string.Empty)
             {

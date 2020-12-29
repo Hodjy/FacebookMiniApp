@@ -3,11 +3,11 @@
 
 namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
-    internal class UserToLoggedInUserAdapter : ILoggedInUser
+    internal class UserToLoggedInUser : ILoggedInUser
     {
         private User m_AdaptedUser;
 
-        public UserToLoggedInUserAdapter(User i_UserToAdapt)
+        public UserToLoggedInUser(User i_UserToAdapt)
         {
             m_AdaptedUser = i_UserToAdapt;
         }
