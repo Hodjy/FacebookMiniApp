@@ -52,6 +52,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Darkmode\DarkmodeHandler.cs" />
+    <Compile Include="Darkmode\DarkModeToggler.cs" />
+    <Compile Include="Darkmode\FormDarkmodeProxy.cs" />
+    <Compile Include="Darkmode\GroupBoxDarkmodeProxy.cs" />
+    <Compile Include="Darkmode\IDarkmodeHandler.cs" />
+    <Compile Include="Darkmode\IDarkmodeToggable.cs" />
+    <Compile Include="Darkmode\LabelDarkmodeProxy.cs" />
     <Compile Include="MainFacebookForm.cs">
       <SubType>Form</SubType>
     </Compile>
