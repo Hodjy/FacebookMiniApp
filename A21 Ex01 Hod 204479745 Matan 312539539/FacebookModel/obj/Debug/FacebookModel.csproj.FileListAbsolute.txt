@@ -7,3 +7,10 @@ X:\Hod\College\Third Year\First Semester\Design Patterns\FacebookApp\FacebookMin
 X:\Hod\College\Third Year\First Semester\Design Patterns\FacebookApp\FacebookMiniApp\A21 Ex01 Hod 204479745 Matan 312539539\FacebookModel\obj\Debug\FacebookModel.csproj.CopyComplete
 X:\Hod\College\Third Year\First Semester\Design Patterns\FacebookApp\FacebookMiniApp\A21 Ex01 Hod 204479745 Matan 312539539\FacebookModel\obj\Debug\FacebookModel.dll
 X:\Hod\College\Third Year\First Semester\Design Patterns\FacebookApp\FacebookMiniApp\A21 Ex01 Hod 204479745 Matan 312539539\FacebookModel\obj\Debug\FacebookModel.pdb
+D:\Program Files (x86)\GitHub\FacebookMiniApp\A21 Ex01 Hod 204479745 Matan 312539539\FacebookModel\obj\Debug\FacebookModel.csprojAssemblyReference.cache
+D:\Program Files (x86)\GitHub\FacebookMiniApp\A21 Ex01 Hod 204479745 Matan 312539539\FacebookModel\obj\Debug\FacebookModel.csproj.CoreCompileInputs.cache
+D:\Program Files (x86)\GitHub\FacebookMiniApp\A21 Ex01 Hod 204479745 Matan 312539539\FacebookModel\bin\Debug\FacebookModel.dll
+D:\Program Files (x86)\GitHub\FacebookMiniApp\A21 Ex01 Hod 204479745 Matan 312539539\FacebookModel\bin\Debug\FacebookModel.pdb
+D:\Program Files (x86)\GitHub\FacebookMiniApp\A21 Ex01 Hod 204479745 Matan 312539539\FacebookModel\obj\Debug\FacebookModel.csproj.CopyComplete
+D:\Program Files (x86)\GitHub\FacebookMiniApp\A21 Ex01 Hod 204479745 Matan 312539539\FacebookModel\obj\Debug\FacebookModel.dll
+D:\Program Files (x86)\GitHub\FacebookMiniApp\A21 Ex01 Hod 204479745 Matan 312539539\FacebookModel\obj\Debug\FacebookModel.pdb

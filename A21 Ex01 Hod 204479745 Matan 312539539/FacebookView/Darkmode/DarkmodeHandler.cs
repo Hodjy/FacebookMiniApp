@@ -21,8 +21,12 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         public void ToggleDarkmode()
         {
-            
-        }
+            EventDarkmodeToggled.Invoke();
 
+            if (m_NextInChain != null)
+            {
+                m_NextInChain.ToggleDarkmode();
+            }
+        }
     }
 }

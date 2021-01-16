@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using System.Collections;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 
@@ -11,10 +11,13 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         private ILoggedInUser m_LoggedInUser;
         private ISelectedItem m_SelectedItem;
         private static readonly object sr_ListboxAddLock = new object();
+        private List<IDarkmodeToggable> m_DarkmodeItems;
+
 
         public MainFacebookForm()
         {
             InitializeComponent();
+            initializeDarkModeComponents();
         }
 
         private void Form_Load(object sender, EventArgs e)
@@ -177,6 +180,25 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             filteredPosts = FacebookLogic.FilterPostsByLikesCount(i_PostsToFilter, i_MinLikesCount);
             addItemsToPostListBox<Post>(filteredPosts);
 
+        }
+
+        private void initializeDarkModeComponents()
+        {
+            m_DarkmodeItems = new List<IDarkmodeToggable>();
+            m_DarkmodeItems.Add(new FormDarkmodeProxy(this));
+            m_DarkmodeItems.Add(new GroupBoxDarkmodeProxy(postsGroupBox));
+            m_DarkmodeItems.Add(new LabelDarkmodeProxy(likesLabel));
+            m_DarkmodeItems.Add(new LabelDarkmodeProxy(likesCountLabel));
+            m_DarkmodeItems.Add(new LabelDarkmodeProxy(commentsLabel));
+            m_DarkmodeItems.Add(new LabelDarkmodeProxy(commentsCountLabel));
+        }
+
+        private void toggleDarkMode()
+        {
+            foreach (IDarkmodeToggable item in m_DarkmodeItems)
+            {
+                item.ToggleDarkmode();
+            }
         }
 
         // EVENTS
@@ -356,6 +378,11 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
                     MessageBox.Show("There was a problem receiving Events.");
                 }
             }
+        }
+
+        private void darkModeButton_Click(object sender, EventArgs e)
+        {
+            toggleDarkMode();
         }
     }
 }
