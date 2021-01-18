@@ -3,7 +3,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
-    public static class FacebookLogic // Maybe change to non-static class
+    public static class FacebookLogic
     {
         private static LoggedInUser sm_LoggedInUser = new LoggedInUser();
         private static readonly string sr_AppID = "3925570110805927";
@@ -80,13 +80,45 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             return filteredPosts;
         }
 
-        public static FacebookObjectCollection<Post> FilterPostsByLikesCount(FacebookObjectCollection<Post> i_PostsToFilter, int i_MinLikesCount)
+        public static FacebookObjectCollection<Post> FilterPostsByLikesCount(FacebookObjectCollection<Post> i_PostsToFilter, int i_LikesCount)
         {
             FacebookObjectCollection<Post> filteredPosts;
 
-            filteredPosts = FacebookFilters.FilterPostsByLikesCount(i_PostsToFilter, i_MinLikesCount);
+            filteredPosts = FacebookFilters.FilterPostsByLikesCount(i_PostsToFilter, i_LikesCount);
 
             return filteredPosts;
+        }
+
+        public static void setLikesFilterComparison(string i_FilterComparisonString)
+        {
+            switch(i_FilterComparisonString)
+            {
+                case "<":
+                    FacebookFilters.FilterByLikesCount.FilterStrategy = (num1, num2) => num1 < num2;
+                    break;
+                case ">":
+                    FacebookFilters.FilterByLikesCount.FilterStrategy = (num1, num2) => num1 > num2;
+                    break;
+                case "=":
+                    FacebookFilters.FilterByLikesCount.FilterStrategy = (num1, num2) => num1 == num2;
+                    break;
+            }
+        }
+
+        public static void setDateFilterComparison(string i_FilterComparisonString)
+        {
+            switch (i_FilterComparisonString)
+            {
+                case "<":
+                    FacebookFilters.FilterByDate.FilterStrategy = (date1, date2) => date1 < date2;
+                    break;
+                case ">":
+                    FacebookFilters.FilterByDate.FilterStrategy = (date1, date2) => date1 > date2;
+                    break;
+                case "=":
+                    FacebookFilters.FilterByDate.FilterStrategy = (date1, date2) => date1 == date2;
+                    break;
+            }
         }
     }
 }

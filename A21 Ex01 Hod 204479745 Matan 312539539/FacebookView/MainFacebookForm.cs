@@ -384,5 +384,15 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             toggleDarkMode();
         }
+
+        private void likesFilterComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FacebookLogic.setLikesFilterComparison(likesFilterComboBox.SelectedItem as string);
+        }
+
+        private void dateFilterComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FacebookLogic.setDateFilterComparison(dateFilterComboBox.SelectedItem as string);
+        }
     }
 }
