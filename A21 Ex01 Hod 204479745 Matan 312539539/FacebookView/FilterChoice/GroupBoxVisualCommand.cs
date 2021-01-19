@@ -2,11 +2,11 @@
 
 namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
-    public class VisualGroupBoxRequest : ICommand
+    public class GroupBoxVisualCommand : ICommand
     {
         private GroupBox m_GroupBoxToHandle;
 
-        public VisualGroupBoxRequest(GroupBox i_GroupBoxToHandle)
+        public GroupBoxVisualCommand(GroupBox i_GroupBoxToHandle)
         {
             m_GroupBoxToHandle = i_GroupBoxToHandle;
         }

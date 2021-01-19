@@ -205,8 +205,8 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void initializeFilterTypeComboBox()
         {
-            ICommand likeGroupBoxRequest = new VisualGroupBoxRequest(filterByLikesGroupBox);
-            ICommand dateGroupBoxRequest = new VisualGroupBoxRequest(filterByDateGroupBox);
+            ICommand likeGroupBoxRequest = new GroupBoxVisualCommand(filterByLikesGroupBox);
+            ICommand dateGroupBoxRequest = new GroupBoxVisualCommand(filterByDateGroupBox);
 
             filterTypeComboBox.Items.Add(new ComboBoxItem(likeGroupBoxRequest, "Filter By Likes"));
             filterTypeComboBox.Items.Add(new ComboBoxItem(dateGroupBoxRequest, "Filter By Date"));
@@ -221,7 +221,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
             if(filterTypeComboBox.SelectedItem is ComboBoxItem)
             {
-                m_PreviousFilterGroupBoxRequest = (filterTypeComboBox.SelectedItem as ComboBoxItem).Request;
+                m_PreviousFilterGroupBoxRequest = (filterTypeComboBox.SelectedItem as ComboBoxItem).Command;
                 m_PreviousFilterGroupBoxRequest.ExecuteCommand();
             }
         }

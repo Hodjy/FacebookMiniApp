@@ -2,12 +2,12 @@
 {
     public class ComboBoxItem
     {
-        private ICommand m_Request;
+        private ICommand m_Command;
         private string m_ItemDescription;
 
         public ComboBoxItem(ICommand i_Request, string i_ItemDescription)
         {
-            m_Request = i_Request;
+            m_Command = i_Request;
             m_ItemDescription = i_ItemDescription;
         }
 
@@ -19,11 +19,11 @@
             }
         }
 
-        public ICommand Request
+        public ICommand Command
         {
             get
             {
-                return m_Request;
+                return m_Command;
             }
         }
     }

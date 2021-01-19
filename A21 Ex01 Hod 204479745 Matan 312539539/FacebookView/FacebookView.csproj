@@ -61,7 +61,7 @@
     <Compile Include="Darkmode\LabelDarkmodeProxy.cs" />
     <Compile Include="FilterChoice\ICommand.cs" />
     <Compile Include="FilterChoice\ComboBoxItem.cs" />
-    <Compile Include="FilterChoice\VisualGroupBoxRequest.cs" />
+    <Compile Include="FilterChoice\GroupBoxVisualCommand.cs" />
     <Compile Include="MainFacebookForm.cs">
       <SubType>Form</SubType>
     </Compile>

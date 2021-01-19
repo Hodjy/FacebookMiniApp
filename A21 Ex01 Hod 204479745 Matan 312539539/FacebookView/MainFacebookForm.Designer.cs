@@ -541,6 +541,7 @@
             this.filterByLikesGroupBox.Controls.Add(this.likesFilterComboBox);
             this.filterByLikesGroupBox.Controls.Add(this.likesNumericUpDown);
             this.filterByLikesGroupBox.Controls.Add(this.likesFilterButton);
+            this.filterByLikesGroupBox.Enabled = false;
             this.filterByLikesGroupBox.Location = new System.Drawing.Point(233, 53);
             this.filterByLikesGroupBox.Name = "filterByLikesGroupBox";
             this.filterByLikesGroupBox.Size = new System.Drawing.Size(200, 78);
@@ -553,6 +554,7 @@
             this.filterByDateGroupBox.Controls.Add(this.dateFilterComboBox);
             this.filterByDateGroupBox.Controls.Add(this.postsDateTimePicker);
             this.filterByDateGroupBox.Controls.Add(this.dateFilterButton);
+            this.filterByDateGroupBox.Enabled = false;
             this.filterByDateGroupBox.Location = new System.Drawing.Point(233, 137);
             this.filterByDateGroupBox.Name = "filterByDateGroupBox";
             this.filterByDateGroupBox.Size = new System.Drawing.Size(200, 76);
