@@ -52,13 +52,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Darkmode\DarkmodeHandler.cs" />
     <Compile Include="Darkmode\DarkModeToggler.cs" />
-    <Compile Include="Darkmode\FormDarkmodeProxy.cs" />
-    <Compile Include="Darkmode\GroupBoxDarkmodeProxy.cs" />
-    <Compile Include="Darkmode\IDarkmodeHandler.cs" />
+    <Compile Include="Darkmode\FormDarkmodeEnabler.cs" />
+    <Compile Include="Darkmode\GroupBoxDarkmodeEnabler.cs" />
     <Compile Include="Darkmode\IDarkmodeToggable.cs" />
-    <Compile Include="Darkmode\LabelDarkmodeProxy.cs" />
+    <Compile Include="Darkmode\LabelDarkmodeEnabler.cs" />
     <Compile Include="FilterChoice\ICommand.cs" />
     <Compile Include="FilterChoice\ComboBoxItem.cs" />
     <Compile Include="FilterChoice\GroupBoxVisualCommand.cs" />

@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
-    public class LabelDarkmodeProxy : IDarkmodeToggable
+    public class LabelDarkmodeEnabler : IDarkmodeToggable
     {
         private Label m_ToggableLabel;
         private bool m_IsDarkmodeEnabled;
@@ -11,7 +11,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         private Color m_LightmodeColor;
         private DarkModeToggler m_DarkmodeToggler;
 
-        public LabelDarkmodeProxy(Label i_Label)
+        public LabelDarkmodeEnabler(Label i_Label)
         {
             m_ToggableLabel = i_Label;
             m_IsDarkmodeEnabled = false;

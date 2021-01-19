@@ -3,17 +3,17 @@ using System.Drawing;
 
 namespace A21_Ex01_Hod_204479745_Matan_312539539
 {
-    public class GroupBoxDarkmodeProxy : IDarkmodeToggable
+    public class FormDarkmodeEnabler : IDarkmodeToggable
     {
-        private GroupBox m_ToggableGroupBox;
+        private Form m_ToggableForm;
         private bool m_IsDarkmodeEnabled;
         private Color m_DarkmodeColor;
         private Color m_LightmodeColor;
         private DarkModeToggler m_DarkmodeToggler;
 
-        public GroupBoxDarkmodeProxy(GroupBox i_GroupBox)
+        public FormDarkmodeEnabler(Form i_Form)
         {
-            m_ToggableGroupBox = i_GroupBox;
+            m_ToggableForm = i_Form;
             m_IsDarkmodeEnabled = false;
             m_LightmodeColor = Color.SteelBlue;
             m_DarkmodeColor = Color.Black;
@@ -53,7 +53,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             set
             {
-                m_ToggableGroupBox.BackColor = value;
+                m_ToggableForm.BackColor = value;
             }
         }
 

@@ -187,12 +187,12 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         private void initializeDarkModeComponents()
         {
             m_DarkmodeItems = new List<IDarkmodeToggable>();
-            m_DarkmodeItems.Add(new FormDarkmodeProxy(this));
-            m_DarkmodeItems.Add(new GroupBoxDarkmodeProxy(postsGroupBox));
-            m_DarkmodeItems.Add(new LabelDarkmodeProxy(likesLabel));
-            m_DarkmodeItems.Add(new LabelDarkmodeProxy(likesCountLabel));
-            m_DarkmodeItems.Add(new LabelDarkmodeProxy(commentsLabel));
-            m_DarkmodeItems.Add(new LabelDarkmodeProxy(commentsCountLabel));
+            m_DarkmodeItems.Add(new FormDarkmodeEnabler(this));
+            m_DarkmodeItems.Add(new GroupBoxDarkmodeEnabler(postsGroupBox));
+            m_DarkmodeItems.Add(new LabelDarkmodeEnabler(likesLabel));
+            m_DarkmodeItems.Add(new LabelDarkmodeEnabler(likesCountLabel));
+            m_DarkmodeItems.Add(new LabelDarkmodeEnabler(commentsLabel));
+            m_DarkmodeItems.Add(new LabelDarkmodeEnabler(commentsCountLabel));
         }
 
         private void toggleDarkMode()
