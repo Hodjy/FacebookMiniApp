@@ -71,6 +71,9 @@
             this.darkModeButton = new System.Windows.Forms.Button();
             this.likesFilterComboBox = new System.Windows.Forms.ComboBox();
             this.dateFilterComboBox = new System.Windows.Forms.ComboBox();
+            this.filterByLikesGroupBox = new System.Windows.Forms.GroupBox();
+            this.filterByDateGroupBox = new System.Windows.Forms.GroupBox();
+            this.filterTypeComboBox = new System.Windows.Forms.ComboBox();
             this.UserGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picturePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ILoggedInUserBindingSource)).BeginInit();
@@ -90,6 +93,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.likesNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureURLPictureBox)).BeginInit();
             this.postsGroupBox.SuspendLayout();
+            this.filterByLikesGroupBox.SuspendLayout();
+            this.filterByDateGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // UserGroupBox
@@ -97,11 +102,9 @@
             this.UserGroupBox.Controls.Add(this.picturePictureBox);
             this.UserGroupBox.Controls.Add(this.userNameLabel);
             this.UserGroupBox.Controls.Add(this.connectionButton);
-            this.UserGroupBox.Location = new System.Drawing.Point(15, 14);
-            this.UserGroupBox.Margin = new System.Windows.Forms.Padding(4);
+            this.UserGroupBox.Location = new System.Drawing.Point(11, 11);
             this.UserGroupBox.Name = "UserGroupBox";
-            this.UserGroupBox.Padding = new System.Windows.Forms.Padding(4);
-            this.UserGroupBox.Size = new System.Drawing.Size(261, 175);
+            this.UserGroupBox.Size = new System.Drawing.Size(196, 142);
             this.UserGroupBox.TabIndex = 0;
             this.UserGroupBox.TabStop = false;
             // 
@@ -109,10 +112,10 @@
             // 
             this.picturePictureBox.BackColor = System.Drawing.Color.SteelBlue;
             this.picturePictureBox.DataBindings.Add(new System.Windows.Forms.Binding("ImageLocation", this.ILoggedInUserBindingSource, "PictureURL", true));
-            this.picturePictureBox.Location = new System.Drawing.Point(9, 12);
-            this.picturePictureBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.picturePictureBox.Location = new System.Drawing.Point(7, 10);
+            this.picturePictureBox.Margin = new System.Windows.Forms.Padding(2);
             this.picturePictureBox.Name = "picturePictureBox";
-            this.picturePictureBox.Size = new System.Drawing.Size(132, 121);
+            this.picturePictureBox.Size = new System.Drawing.Size(99, 98);
             this.picturePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picturePictureBox.TabIndex = 27;
             this.picturePictureBox.TabStop = false;
@@ -124,19 +127,19 @@
             // userNameLabel
             // 
             this.userNameLabel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.ILoggedInUserBindingSource, "Name", true));
-            this.userNameLabel.Location = new System.Drawing.Point(9, 140);
+            this.userNameLabel.Location = new System.Drawing.Point(7, 114);
+            this.userNameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.userNameLabel.Name = "userNameLabel";
-            this.userNameLabel.Size = new System.Drawing.Size(127, 23);
+            this.userNameLabel.Size = new System.Drawing.Size(95, 19);
             this.userNameLabel.TabIndex = 28;
             this.userNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // connectionButton
             // 
             this.connectionButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.connectionButton.Location = new System.Drawing.Point(163, 135);
-            this.connectionButton.Margin = new System.Windows.Forms.Padding(4);
+            this.connectionButton.Location = new System.Drawing.Point(122, 110);
             this.connectionButton.Name = "connectionButton";
-            this.connectionButton.Size = new System.Drawing.Size(85, 28);
+            this.connectionButton.Size = new System.Drawing.Size(64, 23);
             this.connectionButton.TabIndex = 2;
             this.connectionButton.Text = "Log in";
             this.connectionButton.UseVisualStyleBackColor = true;
@@ -148,22 +151,20 @@
             this.userCollectionsTabControl.Controls.Add(this.tabPage2);
             this.userCollectionsTabControl.Controls.Add(this.tabPage3);
             this.userCollectionsTabControl.Controls.Add(this.tabPage4);
-            this.userCollectionsTabControl.Location = new System.Drawing.Point(16, 268);
-            this.userCollectionsTabControl.Margin = new System.Windows.Forms.Padding(4);
+            this.userCollectionsTabControl.Location = new System.Drawing.Point(12, 218);
             this.userCollectionsTabControl.Name = "userCollectionsTabControl";
             this.userCollectionsTabControl.SelectedIndex = 0;
-            this.userCollectionsTabControl.Size = new System.Drawing.Size(285, 326);
+            this.userCollectionsTabControl.Size = new System.Drawing.Size(214, 265);
             this.userCollectionsTabControl.TabIndex = 1;
             // 
             // tabPage1
             // 
             this.tabPage1.AutoScroll = true;
             this.tabPage1.Controls.Add(this.friendsListBox);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Size = new System.Drawing.Size(277, 297);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(206, 239);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Friends";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -174,11 +175,10 @@
             this.friendsListBox.DataSource = this.friendsBindingSource;
             this.friendsListBox.DisplayMember = "Name";
             this.friendsListBox.FormattingEnabled = true;
-            this.friendsListBox.ItemHeight = 16;
             this.friendsListBox.Location = new System.Drawing.Point(0, 0);
-            this.friendsListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.friendsListBox.Margin = new System.Windows.Forms.Padding(2);
             this.friendsListBox.Name = "friendsListBox";
-            this.friendsListBox.Size = new System.Drawing.Size(272, 292);
+            this.friendsListBox.Size = new System.Drawing.Size(205, 238);
             this.friendsListBox.TabIndex = 16;
             this.friendsListBox.ValueMember = "About";
             this.friendsListBox.SelectedIndexChanged += new System.EventHandler(this.friendListListBox_SelectedIndexChanged);
@@ -191,11 +191,10 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.albumsListBox);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(277, 297);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(206, 239);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Albums";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -206,11 +205,10 @@
             this.albumsListBox.DataSource = this.albumsBindingSource;
             this.albumsListBox.DisplayMember = "Name";
             this.albumsListBox.FormattingEnabled = true;
-            this.albumsListBox.ItemHeight = 16;
             this.albumsListBox.Location = new System.Drawing.Point(0, 0);
-            this.albumsListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.albumsListBox.Margin = new System.Windows.Forms.Padding(2);
             this.albumsListBox.Name = "albumsListBox";
-            this.albumsListBox.Size = new System.Drawing.Size(276, 292);
+            this.albumsListBox.Size = new System.Drawing.Size(208, 238);
             this.albumsListBox.TabIndex = 25;
             this.albumsListBox.ValueMember = "Id";
             this.albumsListBox.SelectedIndexChanged += new System.EventHandler(this.albumsListBox_SelectedIndexChanged);
@@ -223,10 +221,9 @@
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.groupsListBox);
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(277, 297);
+            this.tabPage3.Size = new System.Drawing.Size(206, 239);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Groups";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -237,11 +234,10 @@
             this.groupsListBox.DataSource = this.groupsBindingSource;
             this.groupsListBox.DisplayMember = "Name";
             this.groupsListBox.FormattingEnabled = true;
-            this.groupsListBox.ItemHeight = 16;
             this.groupsListBox.Location = new System.Drawing.Point(0, 0);
-            this.groupsListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupsListBox.Margin = new System.Windows.Forms.Padding(2);
             this.groupsListBox.Name = "groupsListBox";
-            this.groupsListBox.Size = new System.Drawing.Size(276, 292);
+            this.groupsListBox.Size = new System.Drawing.Size(208, 238);
             this.groupsListBox.TabIndex = 25;
             this.groupsListBox.ValueMember = "Id";
             this.groupsListBox.SelectedIndexChanged += new System.EventHandler(this.groupsListBox_SelectedIndexChanged);
@@ -254,10 +250,9 @@
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.eventsListBox);
-            this.tabPage4.Location = new System.Drawing.Point(4, 25);
-            this.tabPage4.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(277, 297);
+            this.tabPage4.Size = new System.Drawing.Size(206, 239);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Events";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -268,11 +263,10 @@
             this.eventsListBox.DataSource = this.eventsBindingSource;
             this.eventsListBox.DisplayMember = "Name";
             this.eventsListBox.FormattingEnabled = true;
-            this.eventsListBox.ItemHeight = 16;
             this.eventsListBox.Location = new System.Drawing.Point(0, 0);
-            this.eventsListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.eventsListBox.Margin = new System.Windows.Forms.Padding(2);
             this.eventsListBox.Name = "eventsListBox";
-            this.eventsListBox.Size = new System.Drawing.Size(276, 292);
+            this.eventsListBox.Size = new System.Drawing.Size(208, 238);
             this.eventsListBox.TabIndex = 25;
             this.eventsListBox.ValueMember = "Id";
             this.eventsListBox.SelectedIndexChanged += new System.EventHandler(this.eventsListBox_SelectedIndexChanged);
@@ -296,21 +290,19 @@
             this.postsListBox.BackColor = System.Drawing.Color.SlateGray;
             this.postsListBox.DisplayMember = "Name";
             this.postsListBox.FormattingEnabled = true;
-            this.postsListBox.ItemHeight = 16;
             this.postsListBox.Location = new System.Drawing.Point(1, 0);
-            this.postsListBox.Margin = new System.Windows.Forms.Padding(4);
             this.postsListBox.Name = "postsListBox";
-            this.postsListBox.Size = new System.Drawing.Size(255, 276);
+            this.postsListBox.Size = new System.Drawing.Size(192, 225);
             this.postsListBox.TabIndex = 3;
             this.postsListBox.SelectedIndexChanged += new System.EventHandler(this.postsListBox_SelectedIndexChanged);
             // 
             // myPostsButton
             // 
             this.myPostsButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.myPostsButton.Location = new System.Drawing.Point(471, 268);
-            this.myPostsButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.myPostsButton.Location = new System.Drawing.Point(353, 218);
+            this.myPostsButton.Margin = new System.Windows.Forms.Padding(2);
             this.myPostsButton.Name = "myPostsButton";
-            this.myPostsButton.Size = new System.Drawing.Size(116, 31);
+            this.myPostsButton.Size = new System.Drawing.Size(87, 25);
             this.myPostsButton.TabIndex = 4;
             this.myPostsButton.Text = "My Posts";
             this.myPostsButton.UseMnemonic = false;
@@ -320,40 +312,38 @@
             // collectionsItemsTabControl
             // 
             this.collectionsItemsTabControl.Controls.Add(this.tabPage5);
-            this.collectionsItemsTabControl.Location = new System.Drawing.Point(320, 295);
-            this.collectionsItemsTabControl.Margin = new System.Windows.Forms.Padding(4);
+            this.collectionsItemsTabControl.Location = new System.Drawing.Point(240, 240);
             this.collectionsItemsTabControl.Name = "collectionsItemsTabControl";
             this.collectionsItemsTabControl.SelectedIndex = 0;
-            this.collectionsItemsTabControl.Size = new System.Drawing.Size(267, 298);
+            this.collectionsItemsTabControl.Size = new System.Drawing.Size(200, 242);
             this.collectionsItemsTabControl.TabIndex = 5;
             // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.postsListBox);
-            this.tabPage5.Location = new System.Drawing.Point(4, 25);
-            this.tabPage5.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage5.Size = new System.Drawing.Size(259, 269);
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(192, 216);
             this.tabPage5.TabIndex = 0;
             this.tabPage5.Text = "Posts";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // postsDateTimePicker
             // 
-            this.postsDateTimePicker.Location = new System.Drawing.Point(408, 117);
-            this.postsDateTimePicker.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.postsDateTimePicker.Location = new System.Drawing.Point(71, 18);
+            this.postsDateTimePicker.Margin = new System.Windows.Forms.Padding(2);
             this.postsDateTimePicker.MinDate = new System.DateTime(2004, 1, 1, 0, 0, 0, 0);
             this.postsDateTimePicker.Name = "postsDateTimePicker";
-            this.postsDateTimePicker.Size = new System.Drawing.Size(157, 22);
+            this.postsDateTimePicker.Size = new System.Drawing.Size(119, 20);
             this.postsDateTimePicker.TabIndex = 6;
             // 
             // dateFilterButton
             // 
-            this.dateFilterButton.Location = new System.Drawing.Point(320, 146);
-            this.dateFilterButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dateFilterButton.Location = new System.Drawing.Point(5, 42);
+            this.dateFilterButton.Margin = new System.Windows.Forms.Padding(2);
             this.dateFilterButton.Name = "dateFilterButton";
-            this.dateFilterButton.Size = new System.Drawing.Size(245, 27);
+            this.dateFilterButton.Size = new System.Drawing.Size(184, 22);
             this.dateFilterButton.TabIndex = 7;
             this.dateFilterButton.Text = "Filter posts by date";
             this.dateFilterButton.UseVisualStyleBackColor = true;
@@ -361,23 +351,23 @@
             // 
             // likesNumericUpDown
             // 
-            this.likesNumericUpDown.Location = new System.Drawing.Point(408, 28);
-            this.likesNumericUpDown.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.likesNumericUpDown.Location = new System.Drawing.Point(74, 20);
+            this.likesNumericUpDown.Margin = new System.Windows.Forms.Padding(2);
             this.likesNumericUpDown.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
             this.likesNumericUpDown.Name = "likesNumericUpDown";
-            this.likesNumericUpDown.Size = new System.Drawing.Size(157, 22);
+            this.likesNumericUpDown.Size = new System.Drawing.Size(118, 20);
             this.likesNumericUpDown.TabIndex = 8;
             // 
             // likesFilterButton
             // 
-            this.likesFilterButton.Location = new System.Drawing.Point(320, 58);
-            this.likesFilterButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.likesFilterButton.Location = new System.Drawing.Point(8, 44);
+            this.likesFilterButton.Margin = new System.Windows.Forms.Padding(2);
             this.likesFilterButton.Name = "likesFilterButton";
-            this.likesFilterButton.Size = new System.Drawing.Size(245, 27);
+            this.likesFilterButton.Size = new System.Drawing.Size(184, 22);
             this.likesFilterButton.TabIndex = 9;
             this.likesFilterButton.Text = "Filter posts by likes";
             this.likesFilterButton.UseVisualStyleBackColor = true;
@@ -387,20 +377,18 @@
             // 
             this.messageTextBox.BackColor = System.Drawing.Color.SlateGray;
             this.messageTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.iSelectedItemBindingSource, "Message", true));
-            this.messageTextBox.Location = new System.Drawing.Point(9, 242);
-            this.messageTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.messageTextBox.Location = new System.Drawing.Point(7, 197);
             this.messageTextBox.Multiline = true;
             this.messageTextBox.Name = "messageTextBox";
-            this.messageTextBox.Size = new System.Drawing.Size(503, 143);
+            this.messageTextBox.Size = new System.Drawing.Size(378, 117);
             this.messageTextBox.TabIndex = 14;
             // 
             // pictureURLPictureBox
             // 
             this.pictureURLPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("ImageLocation", this.iSelectedItemBindingSource, "PictureURL", true));
-            this.pictureURLPictureBox.Location = new System.Drawing.Point(119, 23);
-            this.pictureURLPictureBox.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureURLPictureBox.Location = new System.Drawing.Point(89, 19);
             this.pictureURLPictureBox.Name = "pictureURLPictureBox";
-            this.pictureURLPictureBox.Size = new System.Drawing.Size(257, 203);
+            this.pictureURLPictureBox.Size = new System.Drawing.Size(193, 165);
             this.pictureURLPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureURLPictureBox.TabIndex = 16;
             this.pictureURLPictureBox.TabStop = false;
@@ -408,10 +396,9 @@
             // likeButton
             // 
             this.likeButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.likeButton.Location = new System.Drawing.Point(11, 108);
-            this.likeButton.Margin = new System.Windows.Forms.Padding(4);
+            this.likeButton.Location = new System.Drawing.Point(8, 88);
             this.likeButton.Name = "likeButton";
-            this.likeButton.Size = new System.Drawing.Size(100, 42);
+            this.likeButton.Size = new System.Drawing.Size(75, 34);
             this.likeButton.TabIndex = 6;
             this.likeButton.Text = "Like";
             this.likeButton.UseVisualStyleBackColor = true;
@@ -420,10 +407,9 @@
             // likesCountLabel
             // 
             this.likesCountLabel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.iSelectedItemBindingSource, "LikesCount", true));
-            this.likesCountLabel.Location = new System.Drawing.Point(461, 85);
-            this.likesCountLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.likesCountLabel.Location = new System.Drawing.Point(346, 69);
             this.likesCountLabel.Name = "likesCountLabel";
-            this.likesCountLabel.Size = new System.Drawing.Size(51, 28);
+            this.likesCountLabel.Size = new System.Drawing.Size(38, 23);
             this.likesCountLabel.TabIndex = 12;
             this.likesCountLabel.Text = "label1";
             this.likesCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -431,10 +417,9 @@
             // commentButton
             // 
             this.commentButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.commentButton.Location = new System.Drawing.Point(412, 519);
-            this.commentButton.Margin = new System.Windows.Forms.Padding(4);
+            this.commentButton.Location = new System.Drawing.Point(309, 422);
             this.commentButton.Name = "commentButton";
-            this.commentButton.Size = new System.Drawing.Size(100, 50);
+            this.commentButton.Size = new System.Drawing.Size(75, 41);
             this.commentButton.TabIndex = 8;
             this.commentButton.Text = "Comment";
             this.commentButton.UseVisualStyleBackColor = true;
@@ -444,20 +429,18 @@
             // 
             this.likesLabel.AutoSize = true;
             this.likesLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.likesLabel.Location = new System.Drawing.Point(384, 91);
-            this.likesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.likesLabel.Location = new System.Drawing.Point(288, 74);
             this.likesLabel.Name = "likesLabel";
-            this.likesLabel.Size = new System.Drawing.Size(45, 17);
+            this.likesLabel.Size = new System.Drawing.Size(35, 13);
             this.likesLabel.TabIndex = 9;
             this.likesLabel.Text = "Likes:";
             // 
             // commentsCountLabel
             // 
             this.commentsCountLabel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.iSelectedItemBindingSource, "CommentsCount", true));
-            this.commentsCountLabel.Location = new System.Drawing.Point(461, 122);
-            this.commentsCountLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.commentsCountLabel.Location = new System.Drawing.Point(346, 99);
             this.commentsCountLabel.Name = "commentsCountLabel";
-            this.commentsCountLabel.Size = new System.Drawing.Size(51, 28);
+            this.commentsCountLabel.Size = new System.Drawing.Size(38, 23);
             this.commentsCountLabel.TabIndex = 10;
             this.commentsCountLabel.Text = "label1";
             this.commentsCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -466,21 +449,19 @@
             // 
             this.commentsLabel.AutoSize = true;
             this.commentsLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.commentsLabel.Location = new System.Drawing.Point(384, 128);
-            this.commentsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.commentsLabel.Location = new System.Drawing.Point(288, 104);
             this.commentsLabel.Name = "commentsLabel";
-            this.commentsLabel.Size = new System.Drawing.Size(78, 17);
+            this.commentsLabel.Size = new System.Drawing.Size(59, 13);
             this.commentsLabel.TabIndex = 11;
             this.commentsLabel.Text = "Comments:";
             // 
             // commentTextBox
             // 
             this.commentTextBox.BackColor = System.Drawing.Color.SlateGray;
-            this.commentTextBox.Location = new System.Drawing.Point(8, 518);
-            this.commentTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.commentTextBox.Location = new System.Drawing.Point(6, 421);
             this.commentTextBox.Multiline = true;
             this.commentTextBox.Name = "commentTextBox";
-            this.commentTextBox.Size = new System.Drawing.Size(396, 50);
+            this.commentTextBox.Size = new System.Drawing.Size(298, 41);
             this.commentTextBox.TabIndex = 12;
             // 
             // commentsListBox
@@ -489,11 +470,9 @@
             this.commentsListBox.DataSource = this.commentsBindingSource;
             this.commentsListBox.DisplayMember = "Message";
             this.commentsListBox.FormattingEnabled = true;
-            this.commentsListBox.ItemHeight = 16;
-            this.commentsListBox.Location = new System.Drawing.Point(8, 394);
-            this.commentsListBox.Margin = new System.Windows.Forms.Padding(4);
+            this.commentsListBox.Location = new System.Drawing.Point(6, 320);
             this.commentsListBox.Name = "commentsListBox";
-            this.commentsListBox.Size = new System.Drawing.Size(504, 116);
+            this.commentsListBox.Size = new System.Drawing.Size(379, 95);
             this.commentsListBox.TabIndex = 16;
             this.commentsListBox.ValueMember = "Comments";
             // 
@@ -510,19 +489,18 @@
             this.postsGroupBox.Controls.Add(this.likeButton);
             this.postsGroupBox.Controls.Add(this.pictureURLPictureBox);
             this.postsGroupBox.Controls.Add(this.messageTextBox);
-            this.postsGroupBox.Location = new System.Drawing.Point(629, 16);
-            this.postsGroupBox.Margin = new System.Windows.Forms.Padding(4);
+            this.postsGroupBox.Location = new System.Drawing.Point(472, 13);
             this.postsGroupBox.Name = "postsGroupBox";
-            this.postsGroupBox.Padding = new System.Windows.Forms.Padding(4);
-            this.postsGroupBox.Size = new System.Drawing.Size(540, 594);
+            this.postsGroupBox.Size = new System.Drawing.Size(405, 483);
             this.postsGroupBox.TabIndex = 2;
             this.postsGroupBox.TabStop = false;
             // 
             // darkModeButton
             // 
-            this.darkModeButton.Location = new System.Drawing.Point(16, 206);
+            this.darkModeButton.Location = new System.Drawing.Point(12, 172);
+            this.darkModeButton.Margin = new System.Windows.Forms.Padding(2);
             this.darkModeButton.Name = "darkModeButton";
-            this.darkModeButton.Size = new System.Drawing.Size(94, 46);
+            this.darkModeButton.Size = new System.Drawing.Size(70, 25);
             this.darkModeButton.TabIndex = 10;
             this.darkModeButton.Text = "Dark Mode";
             this.darkModeButton.UseVisualStyleBackColor = true;
@@ -536,9 +514,10 @@
             "<",
             ">",
             "="});
-            this.likesFilterComboBox.Location = new System.Drawing.Point(320, 28);
+            this.likesFilterComboBox.Location = new System.Drawing.Point(8, 20);
+            this.likesFilterComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.likesFilterComboBox.Name = "likesFilterComboBox";
-            this.likesFilterComboBox.Size = new System.Drawing.Size(82, 24);
+            this.likesFilterComboBox.Size = new System.Drawing.Size(62, 21);
             this.likesFilterComboBox.TabIndex = 11;
             this.likesFilterComboBox.SelectedIndexChanged += new System.EventHandler(this.likesFilterComboBox_SelectedIndexChanged);
             // 
@@ -550,31 +529,63 @@
             "<",
             ">",
             "="});
-            this.dateFilterComboBox.Location = new System.Drawing.Point(320, 117);
+            this.dateFilterComboBox.Location = new System.Drawing.Point(5, 18);
+            this.dateFilterComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.dateFilterComboBox.Name = "dateFilterComboBox";
-            this.dateFilterComboBox.Size = new System.Drawing.Size(82, 24);
+            this.dateFilterComboBox.Size = new System.Drawing.Size(62, 21);
             this.dateFilterComboBox.TabIndex = 11;
             this.dateFilterComboBox.SelectedIndexChanged += new System.EventHandler(this.dateFilterComboBox_SelectedIndexChanged);
             // 
+            // filterByLikesGroupBox
+            // 
+            this.filterByLikesGroupBox.Controls.Add(this.likesFilterComboBox);
+            this.filterByLikesGroupBox.Controls.Add(this.likesNumericUpDown);
+            this.filterByLikesGroupBox.Controls.Add(this.likesFilterButton);
+            this.filterByLikesGroupBox.Location = new System.Drawing.Point(233, 53);
+            this.filterByLikesGroupBox.Name = "filterByLikesGroupBox";
+            this.filterByLikesGroupBox.Size = new System.Drawing.Size(200, 78);
+            this.filterByLikesGroupBox.TabIndex = 12;
+            this.filterByLikesGroupBox.TabStop = false;
+            this.filterByLikesGroupBox.Visible = false;
+            // 
+            // filterByDateGroupBox
+            // 
+            this.filterByDateGroupBox.Controls.Add(this.dateFilterComboBox);
+            this.filterByDateGroupBox.Controls.Add(this.postsDateTimePicker);
+            this.filterByDateGroupBox.Controls.Add(this.dateFilterButton);
+            this.filterByDateGroupBox.Location = new System.Drawing.Point(233, 137);
+            this.filterByDateGroupBox.Name = "filterByDateGroupBox";
+            this.filterByDateGroupBox.Size = new System.Drawing.Size(200, 76);
+            this.filterByDateGroupBox.TabIndex = 13;
+            this.filterByDateGroupBox.TabStop = false;
+            this.filterByDateGroupBox.Visible = false;
+            // 
+            // filterTypeComboBox
+            // 
+            this.filterTypeComboBox.DisplayMember = "Name";
+            this.filterTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.filterTypeComboBox.FormattingEnabled = true;
+            this.filterTypeComboBox.Location = new System.Drawing.Point(233, 21);
+            this.filterTypeComboBox.Name = "filterTypeComboBox";
+            this.filterTypeComboBox.Size = new System.Drawing.Size(207, 21);
+            this.filterTypeComboBox.TabIndex = 14;
+            this.filterTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.filterTypeComboBox_SelectedIndexChanged);
+            // 
             // MainFacebookForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(1169, 615);
-            this.Controls.Add(this.dateFilterComboBox);
-            this.Controls.Add(this.likesFilterComboBox);
+            this.ClientSize = new System.Drawing.Size(877, 500);
+            this.Controls.Add(this.filterTypeComboBox);
+            this.Controls.Add(this.filterByDateGroupBox);
+            this.Controls.Add(this.filterByLikesGroupBox);
             this.Controls.Add(this.darkModeButton);
-            this.Controls.Add(this.likesFilterButton);
-            this.Controls.Add(this.likesNumericUpDown);
-            this.Controls.Add(this.dateFilterButton);
-            this.Controls.Add(this.postsDateTimePicker);
             this.Controls.Add(this.collectionsItemsTabControl);
             this.Controls.Add(this.myPostsButton);
             this.Controls.Add(this.postsGroupBox);
             this.Controls.Add(this.userCollectionsTabControl);
             this.Controls.Add(this.UserGroupBox);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainFacebookForm";
             this.Text = "Mini Facebook - User";
             this.Load += new System.EventHandler(this.Form_Load);
@@ -598,6 +609,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureURLPictureBox)).EndInit();
             this.postsGroupBox.ResumeLayout(false);
             this.postsGroupBox.PerformLayout();
+            this.filterByLikesGroupBox.ResumeLayout(false);
+            this.filterByDateGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -646,6 +659,9 @@
         private System.Windows.Forms.Button darkModeButton;
         private System.Windows.Forms.ComboBox likesFilterComboBox;
         private System.Windows.Forms.ComboBox dateFilterComboBox;
+        private System.Windows.Forms.GroupBox filterByLikesGroupBox;
+        private System.Windows.Forms.GroupBox filterByDateGroupBox;
+        private System.Windows.Forms.ComboBox filterTypeComboBox;
     }
 }
 

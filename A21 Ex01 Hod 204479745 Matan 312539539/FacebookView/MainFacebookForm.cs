@@ -12,11 +12,13 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         private ISelectedItem m_SelectedItem;
         private static readonly object sr_ListboxAddLock = new object();
         private List<IDarkmodeToggable> m_DarkmodeItems;
+        private ICommand m_PreviousFilterGroupBoxRequest = null;
 
 
         public MainFacebookForm()
         {
             InitializeComponent();
+            initializeFilterTypeComboBox();
             initializeDarkModeComponents();
         }
 
@@ -198,6 +200,29 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             foreach (IDarkmodeToggable item in m_DarkmodeItems)
             {
                 item.ToggleDarkmode();
+            }
+        }
+
+        private void initializeFilterTypeComboBox()
+        {
+            ICommand likeGroupBoxRequest = new VisualGroupBoxRequest(filterByLikesGroupBox);
+            ICommand dateGroupBoxRequest = new VisualGroupBoxRequest(filterByDateGroupBox);
+
+            filterTypeComboBox.Items.Add(new ComboBoxItem(likeGroupBoxRequest, "Filter By Likes"));
+            filterTypeComboBox.Items.Add(new ComboBoxItem(dateGroupBoxRequest, "Filter By Date"));
+        }
+
+        private void changeFilterTypeToDisplay()
+        {
+            if (m_PreviousFilterGroupBoxRequest != null)
+            {
+                m_PreviousFilterGroupBoxRequest.UndoCommand();
+            }
+
+            if(filterTypeComboBox.SelectedItem is ComboBoxItem)
+            {
+                m_PreviousFilterGroupBoxRequest = (filterTypeComboBox.SelectedItem as ComboBoxItem).Request;
+                m_PreviousFilterGroupBoxRequest.ExecuteCommand();
             }
         }
 
@@ -393,6 +418,11 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         private void dateFilterComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             FacebookLogic.setDateFilterComparison(dateFilterComboBox.SelectedItem as string);
+        }
+
+        private void filterTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            changeFilterTypeToDisplay();
         }
     }
 }
