@@ -75,7 +75,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             FacebookObjectCollection<Post> filteredPosts;
 
-            filteredPosts = FacebookFilters.FilterPostsByDate(i_PostsToFilter, i_DateToFilterBy);
+            filteredPosts = FacebookFilters.FilterByDate.Filter(i_PostsToFilter, i_DateToFilterBy);
 
             return filteredPosts;
         }
@@ -84,7 +84,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         {
             FacebookObjectCollection<Post> filteredPosts;
 
-            filteredPosts = FacebookFilters.FilterPostsByLikesCount(i_PostsToFilter, i_LikesCount);
+            filteredPosts = FacebookFilters.FilterByLikesCount.Filter(i_PostsToFilter, i_LikesCount);
 
             return filteredPosts;
         }
@@ -94,13 +94,13 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             switch(i_FilterComparisonString)
             {
                 case "<":
-                    FacebookFilters.FilterByLikesCount.FilterStrategy = (num1, num2) => num1 < num2;
+                    FacebookFilters.FilterByLikesCount.FilterLogic.FilterStrategy = (num1, num2) => num1 < num2;
                     break;
                 case ">":
-                    FacebookFilters.FilterByLikesCount.FilterStrategy = (num1, num2) => num1 > num2;
+                    FacebookFilters.FilterByLikesCount.FilterLogic.FilterStrategy = (num1, num2) => num1 > num2;
                     break;
                 case "=":
-                    FacebookFilters.FilterByLikesCount.FilterStrategy = (num1, num2) => num1 == num2;
+                    FacebookFilters.FilterByLikesCount.FilterLogic.FilterStrategy = (num1, num2) => num1 == num2;
                     break;
             }
         }
@@ -110,13 +110,13 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             switch (i_FilterComparisonString)
             {
                 case "<":
-                    FacebookFilters.FilterByDate.FilterStrategy = (date1, date2) => date1 < date2;
+                    FacebookFilters.FilterByDate.FilterLogic.FilterStrategy = (date1, date2) => date1 < date2;
                     break;
                 case ">":
-                    FacebookFilters.FilterByDate.FilterStrategy = (date1, date2) => date1 > date2;
+                    FacebookFilters.FilterByDate.FilterLogic.FilterStrategy = (date1, date2) => date1 > date2;
                     break;
                 case "=":
-                    FacebookFilters.FilterByDate.FilterStrategy = (date1, date2) => date1 == date2;
+                    FacebookFilters.FilterByDate.FilterLogic.FilterStrategy = (date1, date2) => date1 == date2;
                     break;
             }
         }

@@ -12,7 +12,7 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
         private ISelectedItem m_SelectedItem;
         private static readonly object sr_ListboxAddLock = new object();
         private List<IDarkmodeToggable> m_DarkmodeItems;
-        private ICommand m_PreviousFilterGroupBoxRequest = null;
+        private ICommand m_PreviousFilterGroupBoxCommand = null;
 
 
         public MainFacebookForm()
@@ -174,12 +174,12 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
             addItemsToPostListBox<Post>(filteredPosts);
         }
         
-        private void updateListBoxByLikes(FacebookObjectCollection<Post> i_PostsToFilter, int i_MinLikesCount)
+        private void updateListBoxByLikes(FacebookObjectCollection<Post> i_PostsToFilter, int i_LikesThreshold)
         {
             FacebookObjectCollection<Post> filteredPosts;
 
             clearCollectionsItemsTabControlListBoxes();
-            filteredPosts = FacebookLogic.FilterPostsByLikesCount(i_PostsToFilter, i_MinLikesCount);
+            filteredPosts = FacebookLogic.FilterPostsByLikesCount(i_PostsToFilter, i_LikesThreshold);
             addItemsToPostListBox<Post>(filteredPosts);
 
         }
@@ -214,15 +214,15 @@ namespace A21_Ex01_Hod_204479745_Matan_312539539
 
         private void changeFilterTypeToDisplay()
         {
-            if (m_PreviousFilterGroupBoxRequest != null)
+            if (m_PreviousFilterGroupBoxCommand != null)
             {
-                m_PreviousFilterGroupBoxRequest.UndoCommand();
+                m_PreviousFilterGroupBoxCommand.UndoCommand();
             }
 
             if(filterTypeComboBox.SelectedItem is ComboBoxItem)
             {
-                m_PreviousFilterGroupBoxRequest = (filterTypeComboBox.SelectedItem as ComboBoxItem).Command;
-                m_PreviousFilterGroupBoxRequest.ExecuteCommand();
+                m_PreviousFilterGroupBoxCommand = (filterTypeComboBox.SelectedItem as ComboBoxItem).Command;
+                m_PreviousFilterGroupBoxCommand.ExecuteCommand();
             }
         }
 
