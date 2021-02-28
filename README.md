@@ -1,4 +1,7 @@
 # FacebookMiniApp
+
+![image](https://user-images.githubusercontent.com/62711261/109419890-68053280-79d8-11eb-9224-4ce34b67ebff.png)
+
 A Facebook app that showcases multiple uses of Design Patterns. Written in a C# college course. Written in C# and using Windows Forms.          
 This project is ment to show our understanding of Design Patterns, Class Diagrams, Sequence Diagrams, and Simple Threading.      
 
