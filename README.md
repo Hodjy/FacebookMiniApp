@@ -45,7 +45,7 @@ Showcase the sequence of logging in. The process include using the Proxy class "
 ![image](https://user-images.githubusercontent.com/62711261/109401292-77dc3280-7956-11eb-9592-be0190026a6e.png)
 
 In order to implement "Dark Mode" for our UI, we used the Visitor Design Pattern.       
-We created a Proxy for each Legacy Component that we desired a dark mode functionability for.       
+We created a Proxy for each Windows Forms Legacy Component that we desired a dark mode functionability for.       
 With the Visitor Design Pattern we can add Dark Mode functionability with ease, and reuse its logic.        
 
 ### Sequence Diagram:
