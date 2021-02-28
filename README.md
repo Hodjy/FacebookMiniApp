@@ -51,6 +51,9 @@ In order to implement "Dark Mode" for our UI, we used the Visitor Design Pattern
 We created a Proxy for each Windows Forms Legacy Component that we desired a dark mode functionability for.       
 With the Visitor Design Pattern we can add Dark Mode functionability with ease, and reuse its logic.        
 
+#### Dark Mode:
+![image](https://user-images.githubusercontent.com/62711261/109420126-86b7f900-79d9-11eb-9ddf-2e1970e8fcd2.png)
+
 ### Sequence Diagram:
 ![image](https://user-images.githubusercontent.com/62711261/109401641-7b70b900-7958-11eb-8c28-35ba4d687604.png)
 
@@ -64,3 +67,7 @@ Showcase the sequence of pressing the "Toggle Dark Mode" button.
 
 With the Command Design Pattern we created a "drop down menu" that we can swap between filter types with ease.       
 Instead of using naive methods such as "switch case" for user selection, and to make adding more filter types simpler and easier, we used the Command Design Pattern.
+
+#### Filter Selection:
+![image](https://user-images.githubusercontent.com/62711261/109420397-e367e380-79da-11eb-8c19-4b57a53c737b.png)
+
